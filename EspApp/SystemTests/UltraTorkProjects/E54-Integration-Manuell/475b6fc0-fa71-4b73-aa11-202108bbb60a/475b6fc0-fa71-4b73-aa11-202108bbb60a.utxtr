@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>475b6fc0-fa71-4b73-aa11-202108bbb60a</Id>
+	<Name>ContinueGrindingAfterEarlyStop</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-02-18T09:56:19</Created>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>M120 / RC6</SwVersion>
+	<ExecutionStartTime>2020-02-24T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2020-02-24T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2020-02-24
+Remarks:
+None</Report>
+	<Description>In this test case it will be checked if time is kept counting down when start button is pressed again after grinding from a recipe has been interrupted.
+
+**Initial state of the test**
+The grinder is switched on.
+
+**Test steps**
+(a) make sure that a grind time is saved in recipe 1 
+(b) start grinding from recipe 1 
+    => time begins to count down
+(d) interrupt grinding before it is finished
+(e) start it again
+    => time will continue to count down till 0.0 is reached</Description>
+	<Implementation>HE54-91</Implementation>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-91</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

@@ -1,0 +1,11 @@
+#define TARGET         "HEM-X54-HMI-S01"
+#define VERSION_NO     "03.05"
+#define VERSION_MAJOR  3
+#define VERSION_MINOR  5
+#define VERSION_DATE   "05.07.2027"
+#define DEV_STATE      "BugFixPortafilter"
+#define BUILD_NO       "9999"
+#define BUILD_DATE     "12.07.2023"
+#define BRANCH         "master"
+#define SHA            "dc696632fc0d61cb15a6416fbddbe8dbcc910fd7"
+#define RELEASE_BRANCH 0

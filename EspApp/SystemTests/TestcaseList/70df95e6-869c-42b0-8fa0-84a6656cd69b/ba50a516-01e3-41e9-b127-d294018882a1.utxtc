@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>ba50a516-01e3-41e9-b127-d294018882a1</Id>
+	<Name>E003 Display controller failed</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IN_PROGRESS</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-08T09:17:56</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>This testcase checks display controller failed E003.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestcase>

@@ -1,0 +1,15 @@
+menu "X54 application configuration"
+
+    config DEBUG_WEB_SOCKET
+        bool "Debug WebSocket communication"
+        default n
+
+    config DEBUG_JSON_COMMUNICATION
+        bool "Debug JSON communication"
+        default n
+
+    config DEBUG_OTA_TIMING
+        bool "Debug OTA timing"
+        default n
+
+endmenu

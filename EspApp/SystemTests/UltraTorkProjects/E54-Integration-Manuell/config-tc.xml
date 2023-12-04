@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<Testconfig>
+	<ActorConfigList Name="Default">
+		<ActorConfig Name="ActionCmdInterpreter1" Type="ActorActionCmdInterpreter" Debugname="TestList1"/>
+		<ActorConfig Name="TargetShell1" Type="ActorTargetShell" Debugname="TestPC"/>
+		<ActorConfig Name="SerialConnect1" Type="ActorSerialConnect" Debugname="Serial">
+			<Parameter Name="Port">/dev/ttyUSB0</Parameter>
+			<Parameter Name="Baudrate">115200</Parameter>
+			<Parameter Name="Databits">8</Parameter>
+			<Parameter Name="Stopbits">2</Parameter>
+			<Parameter Name="Parity">N</Parameter>
+		</ActorConfig>
+	</ActorConfigList>
+</Testconfig>

@@ -1,0 +1,92 @@
+def UxChatNotify( String chan = '' )
+{
+	def COLOR_MAP = ['SUCCESS': 'good', 'FAILURE': 'danger', 'UNSTABLE': 'warning', 'ABORTED': '#808080']
+	def STATUS_MAP = ['SUCCESS': 'Success', 'FAILURE': 'Failed', 'UNSTABLE': 'Unstable', 'ABORTED': 'Aborted']
+	slackSend	channel: chan,
+				color: COLOR_MAP[currentBuild.currentResult],
+				message: "${env.JOB_NAME} - #${env.BUILD_NUMBER}: " + STATUS_MAP[currentBuild.currentResult] + " - <${env.BUILD_URL}|Open Jenkins Build>"
+}
+
+pipeline 
+{
+	agent any
+	triggers { pollSCM('H * * * *') }
+
+	options 
+	{
+		disableConcurrentBuilds()
+		buildDiscarder(logRotator( artifactDaysToKeepStr: '', 
+									artifactNumToKeepStr: '10', 
+									daysToKeepStr: '60', 
+									numToKeepStr: '60'))
+		checkoutToSubdirectory('ProjectDir')
+	}
+
+	environment 
+	{
+		UX_ESP32_CPP_LIB_TAG = sh( returnStdout: true, script: 'cat ProjectDir/version.info | sed -n -E "s/UxEsp32CppLibTag=(.+)$/\\1/p"' )
+	}
+
+	stages
+	{
+		stage('Checkout')
+		{
+			steps
+			{
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: env.UX_ESP32_CPP_LIB_TAG ]],
+				    extensions: [[
+							$class: 'RelativeTargetDirectory', 
+							relativeTargetDir: 'UX-EES-ESP32CPPLIB']],
+					userRemoteConfigs: [[
+							credentialsId: 'git', 
+							url: 'ssh://git@ux-git.u-experten.de:224/Ux-Eco/UX-MOVE-E/UX-EES-ESP32CPPLIB.git']]
+				])
+			}
+		}
+
+		stage('Build') 
+		{
+			agent
+			{
+				dockerfile 
+				{
+					dir 'ProjectDir'
+					reuseNode true
+				}
+			}
+
+			steps 
+			{
+				sh 'rm -rf build'
+				sh 'cd ProjectDir;make clean;rm -f sdkconfig;make defconfig;BUILD_NO=${BUILD_NUMBER} CURRENT_BRANCH=${BRANCH_NAME} make all'
+				echo "Generating the delivery package."
+				sh 'cd ProjectDir;BUILD_NO=${BUILD_NUMBER} CURRENT_BRANCH=${BRANCH_NAME} make delivery;mv build ..'
+			}
+		}
+
+		stage('Archive') 
+		{
+			steps 
+			{
+				archiveArtifacts artifacts: "build/*.zip, \
+											build/*.md5, \
+											build/*.log",
+							 fingerprint: true, 
+							 onlyIfSuccessful: true
+			}
+		}
+	}
+
+	post 
+	{
+		changed
+		{
+			script 
+			{
+				UxChatNotify()
+			}
+		}
+	}
+}

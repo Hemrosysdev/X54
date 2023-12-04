@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>7032f51d-19ac-4dfa-b499-3317b5e054ca</Id>
+	<Name>SW-Update via WiFi connection with invalid key</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>BROKEN</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-03-16T13:02:17</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>Testcase description:
+In this testcase it will be checked, if the SW-Downgrade with invalid key e.g. from V02.02 RC1 to V02.00 RC4 via WLAN does not work on X54-HW.
+
+Preconditions:
+1. Serial-Terminal (e.g. gtk) to X54-HW is connected and running.
+2. Access to &quot;hemro.u-experten.de&quot; (jenkins) is possible
+2.1 Select &quot;HEMRO-E54&quot; in jenkins
+2.2 Select f.e. &quot;master&quot; or &quot;Release_V02_00&quot;
+2.3 Select last build e.g. &quot;HEM-E54-HMI-S01-V02.00-11-RC4.zip&quot;
+2.4 Save e.g. &quot;HEM-E54-HMI-S01-V02.00-11-RC4.zip&quot; in Downloads
+2.5 Dezip e.g. &quot;HEM-E54-HMI-S01-V02.00-11-RC4.zip&quot; in Downloads
+
+3. On X54 HW the SW: HEM-X54-HMI-S01-V02.02-1-RC1 - is installed.
+
+
+Testcase execution:
+X54:
+1. Rotate Jogdial to WIFI
+2. LongPress on Jogdial
+3. Rotate Jogdial to &quot;ON&quot; (OFF, ON ,rSET)
+4. LongPress on Jogdial
+PC:
+1. Activate &quot;Funkverbindung&quot;
+2. Select Grinder xxxxx
+3. Insert password: &quot;home1234&quot;
+Internet:
+4. Call X54 webside with IP: 192.168.4.1
+5. Select in &quot;Software update&quot; the Button for &quot;SELECT FILE&quot;
+6. Choose in Downloads the SW-file - e.g. &quot;HEM-E54-HMI-S01-V02.00-11-RC4.bin&quot;
+7. Select in &quot;Software update&quot; the Button for &quot;UPLOAD FILE&quot;
+8. Wait 5 minutes.
+Internet:
+9. Check on X54 Web-Interface with SHOW - in System-statistics - the SW-Version. 
+
+
+Expected result:
+X54
+1. The WIFI-Icon is highlighted
+2. The WIFI-menu is shown
+3. &quot;ON&quot; is adjusted
+4. The WLAN is switched on.
+PC:
+1. &quot;Funkverbindung&quot; is activated
+2. In the list of &quot;Funkverbindung&quot; - grinder is selected
+3. Password is accepted
+Internet:
+4. The X54 webside is displayed with the following layout:
+    1, System statistics &quot;SHOW&quot; (list + csv representation)
+    2. Event Log            &quot;SHOW&quot; (csv)
+    3. Error Log             &quot;SHOW&quot; (csv) 
+
+    4. Software update
+    4.1 Button &quot;SELECT FILE&quot;
+    4.2 Chosen file
+    4.3 Button &quot;UPLOAD FILE&quot; 
+5. The dialog-window appears to select the wished SW-File (bin)
+6. The selected SW-File &quot;HEM-E54-HMI-S01-V02.00-11-RC4.bin&quot; appears in the X54 webside at position &quot;2. Chosen file&quot;
+7. SW-Upload via WLAN to X54 is started --> ERROR case.
+8. After 5 minutes the SW-Downgrade is NOT executed and the SW-Reset is NOT executed.
+On X54 website the following error information is displayed:
+*********************************
+Error during file upload!
+Please repeat upload.
+*********************************
+Internet:
+9. In System-statistics the following Software is displayed: HEM-X54-HMI-S01 with previous Version: V02.02 from 15.03.2021</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-360</RequirementLink>
+		<RequirementLink>HE54-361</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

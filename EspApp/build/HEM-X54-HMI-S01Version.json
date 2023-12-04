@@ -1,0 +1,12 @@
+{
+    "TARGET"        : "HEM-X54-HMI-S01",
+    "VERSION_NO"    : "03.05",
+    "VERSION_MAJOR" : 3,
+    "VERSION_MINOR" : 5,
+    "VERSION_DATE"  : "05.07.2027",
+    "DEV_STATE"     : "BugFixPortafilter",
+    "BUILD_NO"      : "9999",
+    "BUILD_DATE"    : "12.07.2023",
+    "BRANCH"        : "master",
+    "SHA"           : "dc696632fc0d61cb15a6416fbddbe8dbcc910fd7"
+}

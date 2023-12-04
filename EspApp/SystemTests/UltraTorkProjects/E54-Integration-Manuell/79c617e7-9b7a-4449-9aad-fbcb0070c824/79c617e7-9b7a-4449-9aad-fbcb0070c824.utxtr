@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>79c617e7-9b7a-4449-9aad-fbcb0070c824</Id>
+	<Name>Reset disc life time</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-03T14:30:37</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>Testcase description:
+In this testcase it will be checked if the disc-life-time can be reseted after the user press Start/Stop + Jogdial for 10 seconds in recipe position and afterwards rotate Jogdial.
+
+Testcase execution:
+1. Select a recipe with rotate the Jogdial.
+2. Press the Start/Stop-Button and the Jogdial for 10 seconds
+3. Release the Start/Stop + Jogdial.
+4. Rotate the Jogdial
+5. LongPress Jogdial
+6. Check the DiscLifeTime on X54 web interface in System statistics
+7. Check in the Event log the added Event &quot;DiscLifeTimeReset&quot;
+
+Expected result:
+1. One recipe number ( 1 2 3 4 ) is highlighted.
+2. For 10 seconds the display shows running  &quot;        _ &quot;    &quot;       _   &quot;    &quot;     _     &quot;    &quot;_         &quot; 
+3. After 10 seconds &quot;diSC&quot; and &quot;(Time)h&quot; is shown on display -> Disc_Menu
+4. The display shows &quot;rSET TO 0&quot;
+5. The disc-life-time is now 0h (Reset). 
+6. In System Statistics the DiscLifeTime = 0:00:00
+7. In the Event log the &quot;DiscLifeTimeReset&quot; is inserted
+4;1970-01-01T01:26:15;DISCLIFERESET;&quot;1&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-167</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

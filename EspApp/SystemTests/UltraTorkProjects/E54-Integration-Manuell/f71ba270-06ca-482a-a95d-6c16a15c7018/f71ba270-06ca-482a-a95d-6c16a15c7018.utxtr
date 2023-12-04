@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>f71ba270-06ca-482a-a95d-6c16a15c7018</Id>
+	<Name>WiFi access via mDNS</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-03T10:26:25</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC4 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-04T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-04T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-04
+Remarks:
+None</Report>
+	<Description>This testcase checks the access of the grinder via mDNS (hostname).
+
+- mDNS hostname given with x54ginder-&lt;S/N>. 
+- S/N is avalilable from SSID or from WiFi config page (hostname)
+
+Hint: See also TC: &quot;WiFi Settings Design&quot; - Step: 6 -->  1. Hostname   x54grinder-06c266
+
+full mDNS name is &lt;hostname>.local, esp. x54grinder-06c266.local
+
+1. Enter in browser address line with &quot;x54grinder-06c266.local&quot;. 
+- web page must be opened
+
+note: mDNS only works within same network!!
+
+Optional:
+1. Check works from scratch in AP mode.
+
+-  In STA mode connect the host computer with same WiFi (esp. Entwicklung-Test) where the grinder is connected to.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestresult>

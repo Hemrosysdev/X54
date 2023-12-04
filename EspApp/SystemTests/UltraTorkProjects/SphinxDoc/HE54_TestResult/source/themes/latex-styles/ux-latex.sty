@@ -1,0 +1,153 @@
+%-------------------------------------------------------------------------------
+% Packages
+%-------------------------------------------------------------------------------
+
+\usepackage{geometry}
+\geometry{a4paper, left=2.0cm, right=2.0cm, top=2.0cm, bottom=2.0cm,
+bindingoffset=6mm, includeheadfoot}
+
+\usepackage{fancyhdr}
+\usepackage{pmboxdraw}
+\usepackage{xcolor}
+\usepackage{titling}
+\usepackage{sectsty}
+
+%-------------------------------------------------------------------------------
+%  TOC
+%-------------------------------------------------------------------------------
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\usepackage[tocflat]{tocstyle}
+\usetocstyle{standard}
+
+
+%-------------------------------------------------------------------------------
+% Fonts
+%-------------------------------------------------------------------------------
+% only through xelatex support!
+% run sphinx with: make latexpdf LATEXMKOPTS="-xelatex"
+% or set latex_engine = 'xelatex' in the conf.py file
+\usepackage{fontspec}
+\setmainfont{DejaVuSans}
+
+
+%-------------------------------------------------------------------------------
+% Colors
+%-------------------------------------------------------------------------------
+
+\definecolor{uxgray}{gray}{0.65}
+\definecolor{ux-dark-gray}{gray}{0.35}
+
+\allsectionsfont{\color{ux-dark-gray}}
+
+
+%-------------------------------------------------------------------------------
+% Titlepage
+%-------------------------------------------------------------------------------
+
+\makeatletter
+\renewcommand{\sphinxmaketitle}{%
+    \hypersetup{pageanchor=false}% avoid duplicate destination warnings
+    \begin{titlepage}%
+    \thispagestyle{title}
+    \vspace*{\fill}
+      \begin{center}%
+        {\Huge  \textcolor{ux-dark-gray}{ \textbf{ \@title } } \par}%
+        {\large \textcolor{ux-dark-gray}{ \textbf{ Rev. UT_DokumentVersion2_ } } }
+        \vskip 2.5cm%
+        {\large
+         \textcolor{ux-dark-gray}{ \textbf{
+          \begin{tabular}[t]{c}%
+             \todaygerman\\
+              \\
+              Ultratronik GmbH \\
+              Dornierstraße 9 \\
+              82205 Gilching \\
+              \\
+              T  +49 8105 77839-0\\
+              \\
+               \href{mailto:info@ultratronik.de}{info@ultratronik.de} \\
+              \url{www.ultratronik.de}
+          \end{tabular}
+          }
+          }
+       \par}%
+      \end{center}%
+      \par
+      \vspace*{\fill}
+  \end{titlepage}
+}
+\makeatother
+
+
+%-------------------------------------------------------------------------------
+% Header and Footer, Title and other pagestyles
+%-------------------------------------------------------------------------------
+
+% german date - mixed language document
+\newcommand{\leadingzero}[1]{\ifnum #1<10 0\the#1\else\the#1\fi}
+\newcommand{\todaygerman}{\leadingzero{\day}.\leadingzero{\month}.\the\year}
+
+%titlesec::
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\color{ux-dark-gray}}{\chaptertitlename\ \thechapter}
+{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-20pt}{0pt}
+
+
+% required hack due to the sphinx latex style unfortunately including titlesec
+% which overwrites the title variable with the chapter names
+\let\oldtitle\title
+\renewcommand{\title}[1]{\oldtitle{#1}\newcommand{\mythetitle}{#1}}
+
+
+\setlength\parindent{0pt}
+\pagenumbering{arabic}
+
+
+% use the fancy style, many settings are overwritten by the generated
+% sphinx.sty...
+% as it turns out, this sphinx.sty mainly uses the plain and normal
+% (non-chapter-pages) pagestyle definitions
+
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+%---------------General-------------------
+\setlength{\headheight}{18pt}
+
+\fancyhead[L]{
+\includegraphics[scale=0.25]{ux-logo.png}
+}
+
+\fancyhead[R]{
+\textbf{\Large \textcolor{uxgray}{\mythetitle} }
+}
+
+\fancyfoot[L]{
+    \textcolor{uxgray}{
+        \tiny{
+            \\
+            Name / Document-Nr.: \mythetitle \\
+            Revision: UT_DokumentVersion2_ \\
+            Release: UT_SoftwareVersion_ \\
+            Date: \todaygerman\\
+            Note protection notice ISO 16016 \\
+        }
+    }
+}
+%----------------------------------
+
+% chapter / toc
+\fancypagestyle{plain}{
+}
+\fancypagestyle{normal}{
+}
+
+\fancypagestyle{title}{
+    \pagenumbering{gobble}
+    \fancyhead[R]{
+    }
+}
+%----------------------------------

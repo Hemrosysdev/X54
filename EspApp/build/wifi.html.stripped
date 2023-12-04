@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mahlkönig X54 Web Interface - Wifi Config</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="zepto.min.js"></script>
+<script type="text/javascript">
+function updateRadioStaWifiConfig()
+{
+var bStaticSelected = document.getElementById( "sta_wifi_config_static" ).checked;
+document.getElementById( "sta_static_ip" ).disabled      = ( !bStaticSelected );
+document.getElementById( "sta_static_gateway" ).disabled = ( !bStaticSelected );
+document.getElementById( "sta_static_netmask" ).disabled = ( !bStaticSelected );
+}
+function startModal()
+{
+// When the modal is shown, we want a fixed body
+const scrollY = document.documentElement.scrollTop;
+document.body.style.position = 'fixed';
+document.body.style.top = '-' + scrollY + 'px';
+}
+function stopModal()
+{
+const scrollY = document.body.style.top;
+document.body.style.position = '';
+document.body.style.top = '';
+document.documentElement.scrollTop = -parseInt( scrollY );
+}
+function closeConfirmPopup()
+{
+stopModal();
+document.getElementById( "confirm_popup" ).style.display = "none";
+$( "#confirm_popup_ok" ).unbind( "click" );
+}
+function openConfirmPopup( strCaption, strPrompt )
+{
+startModal();
+var confirmPopupElement = document.getElementById( "confirm_popup" );
+var confirmPopupCaptionTextElement = document.getElementById( "confirm_popup_caption_text" );
+var confirmPopupContentElement = document.getElementById( "confirm_popup_content" );
+confirmPopupElement.style.display = "block";
+confirmPopupCaptionTextElement.innerHTML = strCaption;
+confirmPopupContentElement.innerHTML = strPrompt;
+$( "#confirm_popup_ok" ).unbind( "click" );
+}
+function closePopup()
+{
+stopModal();
+popup.style.display = "none";
+}
+function enablePopupOk()
+{
+popup_ok.style.display = "block";
+popup_content.style.height = "390px";
+}
+function openPopup( strCaption, bStartLoader )
+{
+startModal();
+popupCaptionText.innerHTML = strCaption;
+popup.style.display = "block";
+preElement.innerHTML = "";
+logElement.innerHTML = "";
+if ( bStartLoader )
+{
+popupLoader.style.display = "block";
+}
+popupProgressInfo.style.display = "none";
+popup_ok.style.display = "none";
+popup_content.style.height = "490px";
+}
+function onChangeSettings()
+{
+var bSaveDisabled = false;
+if ( "var_saveWifiDisabled" != "" )
+{
+bSaveDisabled = true;
+}
+document.getElementById( "save_wifi" ).disabled = bSaveDisabled;
+document.getElementById( "revert_wifi" ).disabled = false;
+}
+function saveWifiInputs()
+{
+var staticSelected = document.getElementById( "sta_wifi_config_static" ).checked;
+var staticIp        = document.getElementById( "sta_static_ip" ).value;
+var staticGateway   = document.getElementById( "sta_static_gateway" ).value;
+var staticNetmask   = document.getElementById( "sta_static_netmask" ).value;
+var stationSsid     = document.getElementById( "wifi_sta_ssid" ).value;
+var stationPassword = document.getElementById( "wifi_sta_password" ).value;
+var success = false;
+var message = "";
+if ( stationSsid == "" )
+{
+message = "SSID is empty! Please insert a valid SSID!";
+}
+else if ( stationPassword != "" && stationPassword != "fakepw" && stationPassword.length < 8 )
+{
+message = "Invalid password entered! Please insert at minimum 8 characters!";
+}
+else if ( staticSelected )
+{
+var reIpv4 = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
+var staticIpHits      = staticIp.match( reIpv4 );
+var staticGatewayHits = staticGateway.match( reIpv4 );
+var staticNetmaskHits = staticNetmask.match( reIpv4 );
+if ( staticIpHits == null || staticIpHits.length != 1 )
+{
+message = "Please enter a valid static IPv4!";
+}
+else if ( staticGatewayHits == null || staticGatewayHits.length != 1 )
+{
+message = "Please enter a valid gateway IPv4!";
+}
+else if ( staticNetmaskHits == null || staticNetmaskHits.length != 1 )
+{
+message = "Please enter a valid netmask IPv4!";
+}
+else
+{
+success = true;
+}
+}
+else
+{
+success = true;
+}
+if ( success )
+{
+document.getElementById( "save_wifi" ).submit();
+}
+else
+{
+openPopup( "Save WiFi settings" );
+logElement.innerHTML = message;
+enablePopupOk();
+}
+return success;
+}
+</script>
+</head>
+<body onLoad="updateRadioStaWifiConfig();">
+<div style="width:100%;padding:0;">
+<div id="headerBackground" style="width:100%;height:240px;margin:auto;color:black;background-color:white;position:relative;">
+<div id="imageCenterBar" style="position:relative;top:50%;transform:translateY(-50%);">
+<img id="mahlkoenig_logo" alt="Mahlk&ouml;nig Logo"
+style="position:relative;height:120px;left:50%;transform:translateX(-50%);"
+src="mahlkoenig_logo_210x120.png" />
+</div>
+</div>
+<noscript>
+<div style="color: red;font-size: 20px;">
+Please activate Javascript to use X54 Web Interface!
+</div>
+</noscript>
+<div id="infoBackground" style="width:100%;color:black;background-color:#f7f7f7;margin:auto;float:left;">
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<form action="/wifi?id=var_sessionId" accept-charset="utf-8" method="post">
+<table class="infoDataTable" id="tableWifiSettings">
+<tr>
+<td colspan="3">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;color:#918f90;">WiFi Settings</td>
+</tr>
+<tr>
+<td colspan="3"><hr></td>
+</tr>
+<tr>
+<td>Hostname</td>
+<td>
+<input type="text" id="host_name" name="host_name" size="30" value="var_hostName" readonly >
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Current Access Point IP Address</td>
+<td>
+<input type="text" id="current_ap_ip" name="current_ap_ip" value="var_currentApIp" readonly >
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Access Point MAC Address</td>
+<td>
+<input type="text" id="ap_mac_address" name="ap_mac_address" value="var_apMacAddress" readonly >
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Current Station IP Address</td>
+<td>
+<input type="text" id="current_sta_ip" name="current_sta_ip" value="var_currentStaIp" readonly >
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Station MAC Address</td>
+<td>
+<input type="text" id="sta_mac_address" name="sta_mac_address" value="var_staMacAddress" readonly >
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="3"><hr></td>
+</tr>
+<tr>
+<td>Station SSID</td>
+<td>
+<div style="text-indent:20px;">
+<input type="text" id="wifi_sta_ssid" name="wifi_sta_ssid" maxlength="30" value="var_wifiStaSsid" >
+<script>
+$( "#wifi_sta_ssid" ).on( "keydown", function()
+{
+onChangeSettings();
+});
+$( "#wifi_sta_ssid" ).on( "paste", function()
+{
+onChangeSettings();
+});
+</script>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Station Password</td>
+<td>
+<div style="text-indent:20px;">
+<input type="password" id="wifi_sta_password" name="wifi_sta_password" maxlength="32" value="var_wifiStaPassword" >
+<script>
+$( "#wifi_sta_password" ).on( "keydown", function()
+{
+onChangeSettings();
+});
+$( "#wifi_sta_password" ).on( "paste", function()
+{
+onChangeSettings();
+});
+</script>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+<div style="text-indent:20px;">
+<input type="radio" id="sta_wifi_config_dhcp" name="sta_wifi_config" value="dhcp" var_staWifiConfigDhcpChecked >
+<label for="sta_wifi_config_dhcp">DHCP</label>
+<script>
+$( "#sta_wifi_config_dhcp" ).on( "click", function()
+{
+updateRadioStaWifiConfig();
+});
+</script>
+<script>
+$( "#sta_wifi_config_dhcp" ).on( "change", function()
+{
+onChangeSettings();
+});
+</script>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+<div style="text-indent:20px;">
+<input type="radio" id="sta_wifi_config_static" name="sta_wifi_config" value="static" var_staWifiConfigStaticChecked >
+<label for="sta_wifi_config_static">Static IP Address</label>
+<script>
+$( "#sta_wifi_config_static" ).on( "click", function()
+{
+updateRadioStaWifiConfig();
+});
+</script>
+<script>
+$( "#sta_wifi_config_static" ).on( "change", function()
+{
+onChangeSettings();
+});
+</script>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Static IP Address</td>
+<td>
+<div style="text-indent:20px;">
+<input type="text" id="sta_static_ip" name="sta_static_ip" maxlength="16" value="var_staStaticIp" >
+<script>
+$( "#sta_static_ip" ).on( "keydown", function()
+{
+onChangeSettings();
+});
+$( "#sta_static_ip" ).on( "paste", function()
+{
+onChangeSettings();
+});
+</script>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td>
+<div style="text-indent:20px;">
+<input type="text" id="sta_static_gateway" name="sta_static_gateway" maxlength="16" value="var_staStaticGateway" >
+<script>
+$( "#sta_static_gateway" ).on( "keydown", function()
+{
+onChangeSettings();
+});
+$( "#sta_static_gateway" ).on( "paste", function()
+{
+onChangeSettings();
+});
+</script>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Netmask</td>
+<td>
+<div style="text-indent:20px;">
+<input type="text" id="sta_static_netmask" name="sta_static_netmask" maxlength="16" value="var_staStaticNetmask" >
+<script>
+$( "#sta_static_netmask" ).on( "keydown", function()
+{
+onChangeSettings();
+});
+$( "#sta_static_netmask" ).on( "paste", function()
+{
+onChangeSettings();
+});
+</script>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="3"><hr></td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;">
+<button class="redbutton" id="save_wifi" name="save_wifi" disabled>Save</button>
+<button class="blackbutton" id="revert_wifi" name="revert_wifi" style="width:240px;" disabled>Revert</button>
+<script>
+$( "#save_wifi" ).on( "click", function()
+{
+return saveWifiInputs();
+});
+</script>
+</td>
+</tr>
+<tr>
+<td colspan="3">&nbsp;</td>
+</tr>
+</table>
+</form>
+</div>
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<table class="infoTable">
+<tr>
+<td class="tableDescriptorBold" width="308">Home</td>
+<td class="tableDescriptorNormal" width="430" style="text-align: center; white-space: nowrap;">
+<a href="index.html?id=var_sessionId">
+<img alt="Home" align="middle" src="home.png" />
+</a>
+</td>
+</tr>
+<tr>
+<td class="tableDescriptorBold" width="308">Support</td>
+<td class="tableDescriptorNormal" width="430" style="white-space: nowrap;">
+<a href="http://www.mahlkoenig.de/pages/service" target="_blanc">www.mahlkoenig.de/pages/service</a>
+<img alt="X54 QR Code" align="middle" style="height:80px;" src="qrcode.png"	/>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tableDescriptorNormal" style="text-align:center;">
+<a href="copyright.html?id=var_sessionId" style="font-size:12px;">X54 Software Copyright</a>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+<!-- popup definition -->
+<div id="popup" class="popup">
+<div class="popup_box" id="popup_box">
+<span id="popup_close" class="popup_close">&times;</span>
+<div id="popup_caption" class="popup_caption">
+<div id="popup_caption_text" class="popup_caption_text">
+</div>
+</div>
+<div class="popup_content" id="popup_content">
+<div id="popup_loader" class="popup_loader">
+<p>Executing ...</p>
+<p><div class="lds-ripple"><div></div><div></div></div></p>
+</div>
+<div id="popup_progress_info" class="popup_progress_info">
+Upload new firmware file<br>
+<div id="popup_progress_bar" class="popup_progress_bar">
+<div id="popup_progress_bar_progress" class="popup_progress_bar_progress">0%</div>
+</div>
+Update progress. Please wait until the installation is completed!
+</div>
+<div id="log_id"></div>
+<pre id="pre_id"></pre>
+</div>
+<div class="popup_base" id="popup_base">
+<button class="redbutton" id="popup_ok" style="display:none;margin-top:15px;">Ok</button>
+</div>
+</div>
+</div>
+<!-- confirm popup definition -->
+<div id="confirm_popup" class="confirm_popup">
+<div class="confirm_popup_box">
+<span id="confirm_popup_close" class="confirm_popup_close">&times;</span>
+<div id="confirm_popup_caption" class="confirm_popup_caption">
+<div id="confirm_popup_caption_text" class="confirm_popup_caption_text">
+</div>
+</div>
+<div class="confirm_popup_content" id="confirm_popup_content">
+</div>
+<div class="confirm_popup_base" id="confirm_popup_base">
+<table>
+<tr>
+<td><button class="blackbutton" style="width:240px;" id="confirm_popup_cancel">Cancel</button></td>
+<td width="50px">&nbsp;</td>
+<td><button class="redbutton" id="confirm_popup_ok">Ok</button></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+// Get the popup objects
+var popup = document.getElementById( "popup" );
+var popup_close = document.getElementsByClassName( "popup_close" )[0];
+var popup_ok = document.getElementById( "popup_ok" );
+var popup_content = document.getElementById( "popup_content" );
+var popupCaptionText = document.getElementById("popup_caption_text");
+var popupLoader = document.getElementById("popup_loader");
+var popupProgressInfo = document.getElementById("popup_progress_info");
+var popupProgressBar = document.getElementById("popup_progress_bar");
+var popupProgressBarProgress = document.getElementById("popup_progress_bar_progress");
+var preElement = document.getElementById("pre_id");
+var logElement = document.getElementById("log_id");
+// When the user clicks on <span> (x), close the popup
+popup_close.onclick = function()
+{
+closePopup();
+}
+popup_ok.onclick = function()
+{
+closePopup();
+}
+document.getElementById( "confirm_popup_cancel" ).onclick = function()
+{
+closeConfirmPopup();
+};
+document.getElementById( "confirm_popup_close" ).onclick = function()
+{
+closeConfirmPopup();
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mahlkönig X54 Web Interface</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="zepto.min.js"></script>
+<script type="text/javascript">
+function startModal()
+{
+// When the modal is shown, we want a fixed body
+const scrollY = document.documentElement.scrollTop;
+document.body.style.position = 'fixed';
+document.body.style.top = '-' + scrollY + 'px';
+}
+function stopModal()
+{
+const scrollY = document.body.style.top;
+document.body.style.position = '';
+document.body.style.top = '';
+document.documentElement.scrollTop = -parseInt( scrollY );
+}
+function closeConfirmPopup()
+{
+stopModal();
+document.getElementById( "confirm_popup" ).style.display = "none";
+$( "#confirm_popup_ok" ).unbind( "click" );
+}
+function openConfirmPopup( strCaption, strPrompt )
+{
+startModal();
+var confirmPopupElement = document.getElementById( "confirm_popup" );
+var confirmPopupCaptionTextElement = document.getElementById( "confirm_popup_caption_text" );
+var confirmPopupContentElement = document.getElementById( "confirm_popup_content" );
+confirmPopupElement.style.display = "block";
+confirmPopupCaptionTextElement.innerHTML = strCaption;
+confirmPopupContentElement.innerHTML = strPrompt;
+$( "#confirm_popup_ok" ).unbind( "click" );
+}
+function closePopup()
+{
+stopModal();
+popup.style.display = "none";
+}
+function enablePopupOk()
+{
+popup_ok.style.display = "block";
+popup_content.style.height = "390px";
+}
+function openPopup( strCaption, bStartLoader )
+{
+startModal();
+popupCaptionText.innerHTML = strCaption;
+popup.style.display = "block";
+preElement.innerHTML = "";
+logElement.innerHTML = "";
+if ( bStartLoader )
+{
+popupLoader.style.display = "block";
+}
+popupProgressInfo.style.display = "none";
+popup_ok.style.display = "none";
+popup_content.style.height = "490px";
+}
+function resetProgressBar()
+{
+popupProgressBar.value = 0;
+popupProgressText.innerHTML = "0%";
+}
+function prepareLogs( result )
+{
+preElement.innerHTML = "";
+logElement.innerHTML = "";
+var res = result.split("\\n");
+for (let i of res)
+{
+$("#pre_id").append(i);
+}
+}
+function handleFileUpload()
+{
+openPopup( "Firmware update", false );
+const url2='cmd?update&id=var_sessionId';
+var file = $('#file_select').get(0).files[0];
+var timer;
+$.ajax({
+url: url2,
+type: 'POST',
+dataType: 'binary',
+data: file,
+processData: false,
+contentType: 'application/x-www-form-urlencoded',
+xhr:
+function()
+{
+var xhr = $.ajaxSettings.xhr();
+xhr.upload.onprogress = function(evt)
+{
+var progress = Math.ceil( evt.loaded * 100.0 / evt.total ) + "%";
+popupProgressBarProgress.style.width = progress;
+popupProgressBarValue.innerHTML = progress;
+};
+xhr.upload.onload = function()
+{
+popupProgressBarProgress.style.width = "100%";
+popupProgressBarValue.innerHTML = "Upload finished. Checking file now!";
+};
+return xhr ;
+},
+beforeSend:
+function()
+{
+logElement.innerHTML = "";
+popupProgressInfo.style.display="block";
+popupProgressBarProgress.style.width = "0%";
+popupProgressBarValue.innerHTML = "0%";
+},
+success:
+function(result)
+{
+popupProgressInfo.style.display = "none";
+},
+error:
+function(result)
+{
+popupProgressInfo.style.display = "none";
+},
+complete:
+function(result)
+{
+popupProgressInfo.style.display = "none";
+if ( result.responseText.includes( "session invalidated" ) || result.responseText.includes( "access denied" ) )
+{
+logElement.innerHTML = '<font color=red>Error during file upload!<br>Session invalidated.<br>Please refresh web site before and retry.</font>';
+}
+else if ( result.responseText.includes( "software ID check failed" ) || result.responseText.includes( "ERR_OTA_VALIDATE_FAILED" ) )
+{
+logElement.innerHTML = '<font color=red>Error during file upload!<br>File is corrupt or not an X54 software update.</font>';
+}
+else if ( result.responseText.includes( "too much timeouts" ) )
+{
+logElement.innerHTML = '<font color=red>Error during file upload!<br>Poor data connection.<br>Please retry or use another source device.</font>';
+}
+else if ( result.responseText.includes( "package completed" ) )
+{
+logElement.innerHTML = 'Upload successfully done!<br>System performs restart now.<br>Please reconnect after restart has been completed.';
+}
+else
+{
+logElement.innerHTML = '<font color=red>Error during file upload!<br>Please retry.</font>';
+}
+enablePopupOk();
+}
+});
+}
+</script>
+</head>
+<body>
+<div style="width:100%;padding:0;">
+<div id="headerBackground" style="width:100%;height:240px;margin:auto;color:black;background-color:white;position:relative;">
+<div id="imageCenterBar" style="position:relative;top:50%;transform:translateY(-50%);">
+<img id="mahlkoenig_logo" alt="Mahlk&ouml;nig Logo"
+style="position:relative;height:120px;left:50%;transform:translateX(-50%);"
+src="mahlkoenig_logo_210x120.png" />
+</div>
+</div>
+<div id="grinderBackground" style="width:100%;height:960px;color:white;background-color:black;padding:0;">
+<table style="margin:auto;position:relative;top:50%;transform:translateY(-50%);">
+<tr>
+<td>
+<img alt="X54 Grinder" style="height:800px;" src="x54.jpg" />
+</td>
+<td style="text-align:left;padding:100px;">
+<p>
+<div style="font-size:50px;font-weight: bold;">
+X54
+</div>
+</p>
+<p>
+<div style="font-size:20px;font-weight: 500;text-transform: uppercase;">
+SN
+</div>
+<div style="font-size:25px;font-weight: bold;">
+var_currentSn
+</div>
+</p>
+<p>
+<div style="font-size:20px;font-weight: 500;text-transform: uppercase;">
+MODEL
+</div>
+<div style="font-size:25px;font-weight: bold;">
+X54 first edition
+</div>
+</p>
+<p>
+<div style="font-size:20px;font-weight: 500;color: red;display: var_debugHint">
+Uncertified development version!<br>Don't use for production or series!
+</div>
+</p>
+<p>&nbsp;</p>
+<p>
+</p>
+</td>
+</tr>
+</table>
+</div>
+<noscript>
+<div style="color: red;font-size: 20px;">
+Please activate Javascript to use X54 Web Interface!
+</div>
+</noscript>
+<div id="infoBackground" style="width:100%;color:black;background-color:#f7f7f7;margin:auto;float:left;">
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<table class="infoTable">
+<tr>
+<td class="tableDescriptorBold" width="308px">System statistics</td>
+<td width="240">
+<button class="redbutton" id="html_statistics">Show</button>
+<script>
+$( "#html_statistics" ).on( "click", function()
+{
+openPopup( "Statistic data", true );
+const url='info?html_statistics&id=var_sessionId';
+$.ajax({
+url:url,
+type: "GET",
+success:
+function(result)
+{
+$( "#log_id" ).append(result);
+},
+complete:
+function(result)
+{
+popupLoader.style.display = "none";
+enablePopupOk();
+}
+});
+});
+</script>
+</td>
+<td width="160">
+<button class="blackbutton" id="raw_statistics">Show.csv</button>
+<script>
+$( "#raw_statistics" ).on( "click", function()
+{
+openPopup( "Raw statistic data", true );
+const url='info?raw_statistics&id=var_sessionId';
+$.ajax({
+url:url,
+type: "GET",
+success:
+function(result)
+{
+$( "#pre_id" ).append(result);
+},
+complete:
+function(result)
+{
+popupLoader.style.display = "none";
+enablePopupOk();
+}
+});
+});
+</script>
+</td>
+</tr>
+<tr>
+<td class="tableDescriptorBold" width="308px">WiFi Settings <img alt="WiFi Settings" align="middle" src="wifi.png" height="40" style="vertical-align:middle" /></td>
+<td width="240">
+<button class="redbutton" id="wifi_settings">Edit</button>
+<script>
+$( "#wifi_settings" ).on( "click", function()
+{
+window.location = 'wifi.html?id=?id=var_sessionId';
+});
+</script>
+</td>
+<td width="160">
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<table class="infoTable">
+<tr>
+<td class="tableDescriptorBold" width="308px" colspan="2">Only for service technicians</td>
+<td width="160">&nbsp;</td>
+</tr>
+<tr>
+<td class="tableDescriptorBold" width="308px">
+Event log
+</td>
+<td width="240px">
+<button class="redbutton" id="fetchLog">Show</button>
+<script>
+$( "#fetchLog" ).on( "click", function()
+{
+openPopup( "Event log data", true );
+const url='info?event&id=var_sessionId';
+$.ajax({
+url:url,
+type:"GET",
+success:
+function(result)
+{
+prepareLogs(result);
+},
+complete:
+function(result)
+{
+popupLoader.style.display = "none";
+enablePopupOk();
+}
+})
+});
+</script>
+</td>
+<td width="160px">
+</td>
+</tr>
+<tr>
+<td class="tableDescriptorBold">Error log</td>
+<td>
+<button class="redbutton" id="fetchError">Show</button>
+<script>
+$( "#fetchError" ).on( "click", function()
+{
+openPopup( "Error log data" );
+const url='info?error&id=var_sessionId';
+$.ajax({
+url:url,
+type:"GET",
+success:
+function(result)
+{
+prepareLogs(result);
+},
+complete:
+function(result)
+{
+popupLoader.style.display = "none";
+enablePopupOk();
+}
+});
+});
+</script>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="tableDescriptorBold">Complete log data</td>
+<td>
+<button class="redbutton" id="downloadLogs">Download</button>
+<script>
+function dig2( s )
+{
+while (s.toString().length < 2)
+{
+s = "0" + s;
+}
+return s;
+}
+$( "#downloadLogs" ).on( "click", function()
+{
+var date  = new Date();
+var day   = dig2(date.getDate());
+var month = dig2(date.getMonth() + 1);
+var year  = date.getFullYear();
+var hour  = dig2(date.getHours());
+var min   = dig2(date.getMinutes());
+var sec   = dig2(date.getSeconds());
+var timestamp = year + month + day + "_" + hour + min + sec;
+window.location = 'x54-grinder.log?timestamp=' + timestamp + '&id=var_sessionId';
+});
+</script>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<table class="infoTable">
+<tr>
+<td class="tableDescriptorBold" width="308px">Software update</td>
+<td width="240">&nbsp;</td>
+<td width="160">&nbsp;</td>
+</tr>
+<tr>
+<td class="tableDescriptorNormal">1. Please select<br/>HEM-X54-HMI-S01...bin<br/>firmware file</td>
+<td colspan="2">
+<input class="redbutton" id="file_select" name="File" type="file" size="50" accept=".bin,application/octet-stream" hidden/>
+<button class="redbutton" id="file_select_shadow">Select file</button>
+<script>
+$( "#file_select_shadow" ).on( "click", function()
+{
+$( "#file_select" ).click();
+});
+</script>
+</td>
+</tr>
+<tr>
+<td class="tableDescriptorNormal">2. Chosen file</td>
+<td colspan="2" class="tableDescriptorSmallBold">
+<div id="fileChosen">No file chosen</div>
+<script>
+document.getElementById( "file_select" ).addEventListener( 'change', function()
+{
+document.getElementById( "fileChosen" ).innerHTML = this.files[0].name;
+});
+</script>
+</td>
+</tr>
+<tr>
+<td class="tableDescriptorNormal">3. Perform upload &amp; install</td>
+<td>
+<button class="redbutton" id="upload" disabled>Upload File</button>
+<script>
+document.getElementById( "file_select" ).addEventListener( 'change', function()
+{
+document.getElementById( "upload" ).disabled = false;
+});
+$( "#upload" ).on( "click", function()
+{
+handleFileUpload();
+});
+</script>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<table class="infoTable">
+<tr>
+<td class="tableDescriptorBold" width="308">Support</td>
+<td class="tableDescriptorNormal" width="430" style="white-space: nowrap;">
+<a href="http://www.mahlkoenig.de/pages/service" target="_blanc">www.mahlkoenig.de/pages/service</a>
+<img alt="X54 QR Code" align="middle" style="height:80px;" src="qrcode.png"	/>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tableDescriptorNormal" style="text-align:center;">
+<a href="copyright.html?id=var_sessionId" style="font-size:12px;">X54 Software Copyright</a>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+<!-- popup definition -->
+<div id="popup" class="popup">
+<div class="popup_box" id="popup_box">
+<span id="popup_close" class="popup_close">&times;</span>
+<div id="popup_caption" class="popup_caption">
+<div id="popup_caption_text" class="popup_caption_text">
+</div>
+</div>
+<div class="popup_content" id="popup_content">
+<div id="popup_loader" class="popup_loader">
+<p>Executing ...</p>
+<p><div class="lds-ripple"><div></div><div></div></div></p>
+</div>
+<div id="popup_progress_info" class="popup_progress_info">
+Upload new firmware file<br>
+<div id="popup_progress_bar" class="popup_progress_bar">
+<div id="popup_progress_bar_progress" class="popup_progress_bar_progress"></div>
+<div id="popup_progress_bar_value" class="popup_progress_bar_value">0%</div>
+</div>
+Update progress. Please wait until the installation is completed!
+</div>
+<div id="log_id"></div>
+<pre id="pre_id"></pre>
+</div>
+<div class="popup_base" id="popup_base">
+<button class="redbutton" id="popup_ok" style="display:none;margin-top:15px;">Ok</button>
+</div>
+</div>
+</div>
+<!-- confirm popup definition -->
+<div id="confirm_popup" class="confirm_popup">
+<div class="confirm_popup_box">
+<span id="confirm_popup_close" class="confirm_popup_close">&times;</span>
+<div id="confirm_popup_caption" class="confirm_popup_caption">
+<div id="confirm_popup_caption_text" class="confirm_popup_caption_text">
+</div>
+</div>
+<div class="confirm_popup_content" id="confirm_popup_content">
+</div>
+<div class="confirm_popup_base" id="confirm_popup_base">
+<table>
+<tr>
+<td><button class="blackbutton" style="width:240px;" id="confirm_popup_cancel">Cancel</button></td>
+<td width="50px">&nbsp;</td>
+<td><button class="redbutton" id="confirm_popup_ok">Ok</button></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+// Get the popup objects
+var popup = document.getElementById( "popup" );
+var popup_close = document.getElementsByClassName( "popup_close" )[0];
+var popup_ok = document.getElementById( "popup_ok" );
+var popup_content = document.getElementById( "popup_content" );
+var popupCaptionText = document.getElementById("popup_caption_text");
+var popupLoader = document.getElementById("popup_loader");
+var popupProgressInfo = document.getElementById("popup_progress_info");
+var popupProgressBar = document.getElementById("popup_progress_bar");
+var popupProgressBarProgress = document.getElementById("popup_progress_bar_progress");
+var popupProgressBarValue = document.getElementById("popup_progress_bar_value");
+var preElement = document.getElementById("pre_id");
+var logElement = document.getElementById("log_id");
+// When the user clicks on <span> (x), close the popup
+popup_close.onclick = function()
+{
+closePopup();
+}
+popup_ok.onclick = function()
+{
+closePopup();
+}
+document.getElementById( "confirm_popup_cancel" ).onclick = function()
+{
+closeConfirmPopup();
+};
+document.getElementById( "confirm_popup_close" ).onclick = function()
+{
+closeConfirmPopup();
+};
+</script>
+</body>
+</html>

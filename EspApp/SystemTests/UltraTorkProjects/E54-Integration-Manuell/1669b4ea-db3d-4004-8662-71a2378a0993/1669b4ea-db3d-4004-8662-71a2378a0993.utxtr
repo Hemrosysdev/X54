@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>1669b4ea-db3d-4004-8662-71a2378a0993</Id>
+	<Name>Display disc life time</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-03T14:30:13</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>Testcase description:
+In this testcase it will be checked if the disc-life-time is displayed after the user press Start/Stop + Jogdial for 10 seconds in recipe position.
+
+Testcase execution:
+1. Select a recipe with rotate the Jogdial.
+2. Press the Start/Stop-Button and the Jogdial for 10 seconds
+3. Release the Start/Stop + Jogdial.
+
+Expected result:
+1. One recipe number ( 1 2 3 4 ) is highlighted.
+2. For 10 seconds the display shows running  &quot;        _ &quot;    &quot;       _   &quot;    &quot;     _     &quot;    &quot;_         &quot; 
+3. After 10 seconds &quot;diSC&quot; and &quot;(Time)h&quot; is shown on display.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-167</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

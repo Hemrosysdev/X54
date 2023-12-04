@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>39ca2c1c-0f6c-4ceb-ae7f-52f48c944430</Id>
+	<Name>Event WiFi station mode changed start/connect/disconnect/stop WIFISTA</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-22T14:13:53</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC5 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-05T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-05T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-05
+Remarks:
+None</Report>
+	<Description>In this test case it will be checked if the event WIFISTA will be outputted on Hemro X54 web interface when an event in WiFi station mode has been changed.
+
+**Initial state of the test**
+The grinder is switched on. 
+
+**Test steps**
+(1a) Make sure that wifi staus is &apos;on&apos;
+       (wifi icon on grinder is highlighted)
+(1b) Disconnect X54Grinder-9425AA network
+(1c) Connect X54Grinder-9425AA network again
+(1d) Go to X54 web interface (192.168.4.1)
+(1e) Press the for Event Log &quot;SHOW&quot; and check the log output
+      => current session-id; UTC-time; event will be listed 
+eg for (1b) : 
+58;1970-01-01T04:13:57;GRWIFICFG;&quot;Off&quot;
+58;1970-01-01T04:13:58;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+58;1970-01-01T04:13:58;WIFIAP;&quot;Stop&quot;
+eg for (1c) : 
+58;1970-01-01T04:14:18;GRWIFICFG;&quot;On&quot;
+58;1970-01-01T04:14:18;WIFIAP;&quot;Start&quot;
+58;1970-01-01T04:15:54;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+
+(2a) Make sure that wifi staus is &apos;on&apos; and X54Grinder-9425AA network is connected
+(2b) Go in standby mode
+(2c) Switch the grinder on again
+(2d) Press the for Event Log &quot;SHOW&quot; and check the log output
+      => current session-id; UTC-time; event will be listed 
+eg for (2b) : 
+65;1970-01-01T05:12:31;STDBY;&quot;On&quot;
+65;1970-01-01T05:12:32;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+65;1970-01-01T05:12:32;WIFIAP;&quot;Stop&quot;
+ 
+eg for (2c) : 
+65;1970-01-01T05:12:33;STDBY;&quot;Off&quot;
+65;1970-01-01T05:12:33;WIFIAP;&quot;Start&quot;
+65;1970-01-01T05:12:35;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-9</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

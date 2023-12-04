@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>6c19897e-3f0f-43ba-85f0-407e6f972873</Id>
+	<Name>TimeoutOfEditMode</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-02-21T17:40:09</Created>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>M120 / RC6</SwVersion>
+	<ExecutionStartTime>2020-02-24T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2020-02-24T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2020-02-24
+Remarks:
+None</Report>
+	<Description>In this test case it will be checked if the edit mode will be left at inactivity after 5 seconds.
+
+**Initial state of the test**
+The grinder is switched on. 
+
+**Test steps**
+(1) Activate edit mode of recipe 1:
+(1a) select recipe 1 by rotating the jog dial
+    => the clock-, the s- and the recipe 1 -icon will be highlighted
+(1b) long press the jog dial
+    => edit mode will be entered and the first edit position is blinking
+(2) wait 5 seconds
+    => edit mode will be left
+
+The test is carried out with all menues with edit mode.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-97</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

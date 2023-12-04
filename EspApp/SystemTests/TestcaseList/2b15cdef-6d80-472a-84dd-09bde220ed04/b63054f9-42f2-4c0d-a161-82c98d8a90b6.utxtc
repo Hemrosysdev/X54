@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>b63054f9-42f2-4c0d-a161-82c98d8a90b6</Id>
+	<Name>Start grinding again after 90sec</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-18T10:52:47</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>Testcase description:
+In this testcase it will be checked if the grinding by recipe does not increase the time in system statistics more than 90 sec if grindig is started again after 90 sec (max value)
+
+Precondition:
+1. Select a recipe 4 with rotate the Jogdial
+2. LongPress the Jogdial to edit recipe 4 and increase the time to 90.0 sec 
+
+WiFi = On
+Call X54 web interface and select SHOW for system statistics to notice the different values 
+for recipe 4; Total - Grinds, Shots, DiscLifeTime, TotalMotorOnTime.
+
+
+Testcase execution:
+1. Select recipe 4 with rotate the Jogdial
+2. Press the Start/Stop-Button.
+3. Press again the Start/Stop-Button at 0.0 sec (wait &lt; 5 sec)
+4.Call X54 web interface and select SHOW for system statistics
+
+Expected result:
+1. One recipe number 4 is highlighted.
+2. The time counts down from 90.0 sec to 0.0 sec
+3. No change (display remains in 0.0 sec)
+4. System statistics:
+In system statistics are following counters incremented (changed)
+Num of Total Grind Shots:         +1
+Total Grind Time:                       + 1.30 (90 sec)
+
+Num of Grind Shots Recipe 4:  +1
+Grind Time Recipe 4:                +1:30
+
+Disc Life Time:                          +1:30
+Total Motor On Time                 +1:30</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-295</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

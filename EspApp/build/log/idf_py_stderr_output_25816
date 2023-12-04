@@ -1,0 +1,13 @@
+fatal: detected dubious ownership in repository at '/opt/esp/esp-idf-v5.0'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/esp/esp-idf-v5.0
+CMake Error at /opt/esp/esp-idf-v5.0/tools/cmake/build.cmake:245 (message):
+  Failed to resolve component 'esp_adc_cal'.
+Call Stack (most recent call first):
+  /opt/esp/esp-idf-v5.0/tools/cmake/build.cmake:281 (__build_resolve_and_add_req)
+  /opt/esp/esp-idf-v5.0/tools/cmake/build.cmake:574 (__build_expand_requirements)
+  /opt/esp/esp-idf-v5.0/tools/cmake/project.cmake:440 (idf_build_process)
+  CMakeLists.txt:15 (project)
+
+

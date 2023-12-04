@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>87337b5c-9189-4f4e-9939-f42ad2ddd0a6</Id>
+	<Name>E008 EEPROM failed</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IN_PROGRESS</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-08T09:18:56</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>This testcase checks EEPROM failed E008.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestcase>

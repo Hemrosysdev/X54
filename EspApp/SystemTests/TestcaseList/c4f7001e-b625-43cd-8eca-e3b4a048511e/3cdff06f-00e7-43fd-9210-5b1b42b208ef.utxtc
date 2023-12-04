@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>3cdff06f-00e7-43fd-9210-5b1b42b208ef</Id>
+	<Name>Timeout at manual grinding</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2019-11-29T08:19:05</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>In this testcase it will be checked if a manual grinding process will be stopped at inactivity after a timeout of 90 sec.
+It also will be checked if grinding will be continued if the start button is pressed within 5 sec after the timeout.
+
+**Initial state of the test**
+The grinder is switched on.
+
+**Test steps**
+(a) Select manual grinding menu by rotating the jog dial
+      => the manual-grinding-icon, the clock- and the s-icon is highlighted
+(b) Press the start button
+     => grinding time begins to count up
+(c) Wait 90 sec
+     => after 90 sec grinding will be stopped
+          90.0 is shown for 5 seconds, then the display will be dimmed
+(d) Press the start button again and wait until grinding will be stopped after the timeout
+(e) Press the start button within 5 seconds after the timeout
+     => time count up will not be continued the time ist fixed to 90 sec for 5 sec, then the display will be dimmed
+
+**Notifications**
+During the whole test the manual-grinding-icon, the clock- and the s-icon is highlighted.
+During grinding the red motor LED is on.</Description>
+	<Implementation>HE54-43</Implementation>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-43</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

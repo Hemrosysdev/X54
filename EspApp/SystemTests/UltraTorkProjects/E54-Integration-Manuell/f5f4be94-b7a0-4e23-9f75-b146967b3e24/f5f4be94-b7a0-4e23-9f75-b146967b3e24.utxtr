@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>f5f4be94-b7a0-4e23-9f75-b146967b3e24</Id>
+	<Name>Start/Stop grinding with start-button</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2019-12-04T14:24:04</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-03T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-03T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-03
+Remarks:
+None</Report>
+	<Description>In this test case it will be checked if the grinder will be started respectively stopped when the start button on the HMI is pressed. 
+It also will be checked if starting and stopping happens after the release of the button.
+
+**Initial state of the test**
+The grinder is switched off 
+
+**Test steps**
+(a) Press the start button
+     => the grinder will be switched on
+(b) Select manual grinding menu by rotating the jog dial
+      => the manual-grinding-icon, the clock- and the s-icon is highlighted
+(c) Press the start button again
+     => grinding time begins to count up after the button has been released
+(d) Press the start button after a certain time for one more time
+     => grinding will be stopped after the button has been released
+     The reached time is shown for 5 seconds, then 0.0 is shown
+
+**Notifications**
+During the whole test the manual-grinding-icon, the clock- and the s-icon is highlighted on the display.
+During grinding the red motor LED is on.</Description>
+	<Implementation>HE54-33</Implementation>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-33</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

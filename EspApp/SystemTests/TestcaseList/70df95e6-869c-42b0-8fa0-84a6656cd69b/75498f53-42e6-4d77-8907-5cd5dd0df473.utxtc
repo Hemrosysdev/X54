@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>75498f53-42e6-4d77-8907-5cd5dd0df473</Id>
+	<Name>E002 wrong credentials in WiFi settings</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-04T11:27:09</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>This testcase checks the error case, if wrong WiFi credentials are insertet in WiFi settings. The grinder react with Error E002.
+
+Execute: TC: Error Case wrong WiFi credentials
+
+see also below:
+
+This testcase checks the error case, if wrong WiFi credentials are insertet in WiFi settings. The grinder react with Error E002.
+
+Grinder is in AP mode (use WiFi rSEt on grinder).
+
+1. Connect host to grinder AP SSID.
+
+-   Open web page with IP 192.168.4.1 in browser.
+
+-   Select WiFi symbol to open config page.
+
+-   Page is showing that grinder is in in Access Point mode.
+
+2. Enter WiFi credentials of your local WiFi.
+
+Esp.
+SSID: UX-Wurschtl (not existing!)
+password: &lt;given in XWiki>
+
+3. Select radio button: &quot;Static IP Address&quot;.
+
+Static IP Address, gateway and Netmask are editable now.
+
+4. Enter all three fields, which must match the local WiFi router configuration.
+
+Sample: Entwicklung-Test -> subnet is 192.168.178.xxx
+
+Static IP address: 192.168.178.50, where xxx is a unused IP address in the network 
+Hint: (if connected previously via DHCP, you can select the same IP addres)
+Gateway: 192.168.178.1
+Netmask: 255.255.255.0
+
+    The WiFi Settings are displayed with the following information:
+    1. Hostname   x54grinder-06c266
+    2. Current Access Point IP Address  192.168.4.1
+    3. Access Point MAC Address  f0:08:d1:5f:7c:15
+    4. Current Station IP Address  192.168.178.50
+    5. Station MAC Address   f0:08:d1:5f:7c:14
+    6. Station SSID  Entwicklung-Test
+    7. Station Password --> WRONG PW-->Entwicklung-Test
+    8. Select --> Radio-Button: &quot;Static IP Address&quot;
+    9. Static IP Address  192.168.178.50
+    10, Gateway  192.168.178.1
+    11: Netmask  255.255.255.0
+    12. Select --> Button: &quot;SAVE&quot; 
+
+5. Select the Button &quot;SAVE&quot;.
+
+-  browser will loss connection
+-  grinder shows blinking WiFi symbol for 1 minute
+-  if blinking stops, error symbol appears and eror on grinder E002 is shown
+
+
+Info: Grinder is not available via new IP address given by the local WiFi router.
+
+6. Check Error E002 is inserted in Eror log data
+
+- Grinder is in AP mode (use WiFi rSEt on grinder).
+- Host: - Entwicklung-Test - trennen
+
+-   Open web page with IP 192.168.4.1 in browser.
+
+-   Select WiFi symbol to open config page.
+
+-   Page is showing that grinder is in in Access Point mode.
+
+-   Select &quot;Error log data&quot; in page
+
+The Error E002 is inserted in &quot;Error log data&quot; (last entry in list of errors).
+
+66;1970-01-01T00:21:46;E002;&quot;WiFi failed&quot;;Activate;&quot;&quot;
+66;1970-01-01T00:21:46;E002;&quot;WiFi failed&quot;;Deactivate;&quot;&quot;
+66;1970-01-01T00:22:17;E002;&quot;WiFi failed&quot;;Activate;&quot;&quot;
+66;1970-01-01T00:22:39;E002;&quot;WiFi failed&quot;;Deactivate;&quot;&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestcase>

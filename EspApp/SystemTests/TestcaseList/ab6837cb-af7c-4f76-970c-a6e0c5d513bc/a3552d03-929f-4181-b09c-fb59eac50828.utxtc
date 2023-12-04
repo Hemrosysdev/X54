@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>a3552d03-929f-4181-b09c-fb59eac50828</Id>
+	<Name>Event WiFi changed GRWIFICFG</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-01-30T09:03:30</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>In this test case it will be checked if the event GRWIFICFG will be outputted on Hemro X54 web interface when the wifi setting in the wifi menu on the grinder has been changed.
+
+**Initial state of the test**
+The grinder is switched on. 
+
+**Test steps**
+(a) Change the wifi setting:
+     Rotate the jog dial to enter wifi menu
+     Long press the jog dial
+     Set status to &apos;on&apos;, &apos;reset&apos; or &apos;off&apos; by rotating the jog dial
+     Save the status by long pressing the jog dial
+(b) To read out the logs make sure that wifi staus is &apos;on&apos;
+(c) Make sure that X54Grinder-9425AA network is connected
+(d) Go to X54 web interface (192.168.4.1)
+(e) Press the button for Event Log &quot;SHOW&quot; and check the log output
+     => current session-id; UTC-time; event will be listed 
+          eg: 19;1970-01-01T03:30:58;GRWIFICFG;&quot;On&quot;
+                19;1970-01-01T03:35:09;GRWIFICFG;&quot;Off&quot;
+               19;1970-01-01T03:36:42;GRWIFICFG;&quot;Reset&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-9</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

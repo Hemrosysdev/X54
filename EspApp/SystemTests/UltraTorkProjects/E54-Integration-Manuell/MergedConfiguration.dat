@@ -1,0 +1,36 @@
+
+
+[MetaDataBegin]
+
+Name=
+ShortName=
+[MetaDataEnd]
+
+
+
+
+[DescriptionBegin]
+
+Test-HW:
+
+- SUT
+- Serial Interface
+[DescriptionEnd]
+
+
+[ConfigurationBegin]
+
+ActorConfigList {
+    ActorActionCmdInterpreter::ActionCmdInterpreter1 => TestList1;
+
+    ActorTargetShell::TargetShell1 => TestPC;
+
+    ActorSerialConnect::SerialConnect1 => Serial {
+        Port := /dev/ttyUSB0;
+        Baudrate := 115200;
+        Databits := 8;
+        Stopbits := 2;
+        Parity := N;
+    };
+};
+[ConfigurationEnd]

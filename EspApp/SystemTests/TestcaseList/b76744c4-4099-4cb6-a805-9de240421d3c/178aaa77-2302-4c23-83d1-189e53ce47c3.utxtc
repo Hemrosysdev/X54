@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>178aaa77-2302-4c23-83d1-189e53ce47c3</Id>
+	<Name>Change to local WiFi Static</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-03T10:28:21</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>This testcase checks the change to local WiFi Static.
+
+Grinder is in AP mode (use WiFi rSEt).
+
+1. Connect host to grinder AP SSID.
+
+-   Open web page with IP 192.168.4.1 in browser.
+
+-   Select WiFi symbol to open config page.
+
+-   Page is showing that grinder is in in Access Point mode.
+
+2. Enter WiFi credentials of your local WiFi.
+
+Esp.
+Station SSID: Entwicklung-Test
+Station Password: &lt;given in XWiki> --> PW --> Entwicklung-Test
+
+3. Select radio button: &quot;Static IP Address&quot;.
+
+Static IP Address, gateway and Netmask are editable now.
+
+4. Enter all three fields, which must match the local WiFi router configuration.
+
+Sample: Entwicklung-Test -> subnet is 192.168.178.xxx
+
+Static IP address: 192.168.178.50, where xxx is a unused IP address in the network 
+Hint: (if connected previously via DHCP, you can select the same IP addres)
+Gateway: 192.168.178.1
+Netmask: 255.255.255.0
+
+
+5. Select the Button &quot;SAVE&quot;.
+
+-  browser will loss connection
+-  grinder shows blinking WiFi symbol as long as in reconfiguration
+-  if blinking stops, reconfiguration is finished.
+
+Info: Grinder is now available via new IP address which has been entered in the static IP address field.
+
+6. Host-PC: Connect to Entwicklung-Test and open web page.
+
+7. Select for WiFi Settings the &quot;EDIT&quot;
+    The WiFi Settings are displayed with the following information:
+    1. Hostname   x54grinder-06c266
+    2. Current Access Point IP Address  192.168.4.1
+    3. Access Point MAC Address  f0:08:d1:5f:7c:15
+    4. Current Station IP Address  192.168.178.50
+    5. Station MAC Address   f0:08:d1:5f:7c:14
+    6. Station SSID  Entwicklung-Test
+    7. Station Password PW-->Entwicklung-Test
+    8. Select --> Radio-Button: &quot;Static IP Address&quot;
+    9. Static IP Address  192.168.178.50
+    10, Gateway  192.168.178.1
+    11: Netmask  255.255.255.0</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestcase>

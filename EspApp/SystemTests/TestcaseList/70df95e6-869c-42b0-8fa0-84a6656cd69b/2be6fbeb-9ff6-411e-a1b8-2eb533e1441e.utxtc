@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>2be6fbeb-9ff6-411e-a1b8-2eb533e1441e</Id>
+	<Name>E001 dismounted bean hopper</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-01-29T13:42:18</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>Error E001 occures when the bean hopper is dismounted.
+In this test case the behaviour of this error will be checked, namely:
+- if the error will be displayed 
+- if the grinder is operable during the error is active
+  (it should not be operable)
+- if it is possible to leave the error menu while the error is active  
+  (it should not be possible)
+- if the error menu has a timeout
+  (it should not have a timeout, it will be displayed till the grinder goes to sleep mode)
+
+**Initial state of the test**
+The grinder is switched on or off.
+
+**Test steps**
+(a) Set the bean hopper switch to position &apos;unmounted&apos;
+     => The been hopper now is considered as unmounted
+          Error E001 will be displayed
+          On X54 web interface the Error E001 is incremented In System statistics
+          On X54 web interface the Error E001 is added In Error log
+(b) Try to activate grinding by pressing the start button
+     => Grinding cannot be started, Error E001 is still displayed
+(c) Try to select any menu by rotating the jog dial
+     => It is not possible, Error E001 is still displayed
+(d) Wait till the grinder goes to sleep mode
+     => until then the error will be displayed
+(e) Start the grinder by pressing the start button
+     => still no action is possible, the error is displayed
+(f) Switch the bean hopper switch to position &apos;mounted&apos;
+     => the error is no longer displayed, the grinder can be operated again</Description>
+	<Implementation>HE54-26</Implementation>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-10</RequirementLink>
+		<RequirementLink>HE54-27</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>a78c794d-e767-442f-91ed-aa2d029a96d3</Id>
+	<Name>BlockJogDialActionsDuringGrindingFromARecipe</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-02-21T17:22:26</Created>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>M120 / RC6</SwVersion>
+	<ExecutionStartTime>2020-02-24T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2020-02-24T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2020-02-24
+Remarks:
+None</Report>
+	<Description>In this test case it will be checked if jog dial actions will be ignored during grinding.
+
+**Initial state of the test**
+The grinder is switched on.
+
+**Test steps**
+(a) Start grinding by recipe 1
+    see: &apos;ExecuteGrindingFromAPredefinedRecipe&apos;
+(b) Try to operate the jog dial by pressing or rotating the jog dial
+    => grinding will not be disturbed
+
+The test will be carried out also with recipe 2, 3 and 4.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-92</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

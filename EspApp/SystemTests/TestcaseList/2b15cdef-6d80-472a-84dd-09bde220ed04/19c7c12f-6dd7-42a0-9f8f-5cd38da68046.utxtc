@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>19c7c12f-6dd7-42a0-9f8f-5cd38da68046</Id>
+	<Name>Continue grinding within 5sec after stopping last grinding from recipe</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2019-12-05T10:58:25</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>In this test case it will be checked if grinding will be continued when it will be started again with the start button within 5 seconds after the last grinding.
+
+**Initial state of the test**
+The grinder is switched on.
+
+**Test steps**
+(a) make sure that a grind time is saved in recipe 1 
+(b) select recipe 1 by rotating the jog dial
+     => the clock-, the s- and the recipe 1 -icon will be highlighted
+(c) press the start button to start grinding
+     => time begins to count down till 0.0 is reached
+(d) wait 5 seconds till the preset time in the recipe is shown again
+(e) start grinding again
+     => time begins to count down till 0.0 is reached
+(f) press the start button within 5 seconds again
+     => now the time will count up beginning with the preset  time
+
+Note:
+This test is carried out also with recipe 2, 3 and 4</Description>
+	<Implementation>HE54-42</Implementation>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-42</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

@@ -1,0 +1,18 @@
+GeneratorModel for yakindu::cpp 
+{
+	statechart SystemStateMachine
+	{
+		feature Outlet
+		{
+			targetProject = "Hemro E54"
+			targetFolder = "/EspApp/Application/SystemStateCtrlTask/YakinduGenCode"
+			libraryTargetFolder = "/EspApp/Application/SystemStateCtrlTask/YakinduLibrary" 
+		}
+		
+		feature Tracing 
+		{
+		    enterState = true
+		    exitState  = true
+		}
+	}
+}

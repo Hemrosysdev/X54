@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>8862eaaf-1e96-4ad1-8204-ba5d4c04c969</Id>
+	<Name>Reduced time to save recipe position</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-03T14:40:56</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>Testcase description:
+In this testcase it will be checked, if the position of a recipe (1;2;3;4) is saved, while the user remains in this position for 3 seconds (instead of 5 seconds).
+
+Testcase execution:
+A)
+1. Select a recipe with rotate the Jogdial.
+2. Wait 3 seconds.
+3. SwitchOff (PowerOff) the X54 HW.
+4. SwitchOn (PowerOn) the X54 HW.
+
+B)
+1. Select recipe 2 with rotate the Jogdial.
+2. Wait 3 seconds.
+3. Select recipe 3 with rotate the Jogdial.
+4. Wait 2 seconds.
+5. SwitchOff (PowerOff) the X54 HW.
+6. SwitchOn (PowerOn) the X54 HW.
+
+Expected result
+A)
+1. One recipe number ( 1 2 3 4 ) is highlighted.
+2. n/a
+3. The power is switched off.
+4. After PowerOn the previous selected recipe is displayed.
+
+B)
+1. The recipe number 2 is highlighted.
+2. n/a
+1. The recipe number 3 is highlighted.
+2. n/a
+3. The power is switched off.
+4. After PowerOn the previous selected recipe 2 is displayed.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-106</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

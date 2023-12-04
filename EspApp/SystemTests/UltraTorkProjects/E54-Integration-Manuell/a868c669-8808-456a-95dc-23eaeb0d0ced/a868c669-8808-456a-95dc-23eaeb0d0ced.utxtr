@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>a868c669-8808-456a-95dc-23eaeb0d0ced</Id>
+	<Name>Statistic data representation in web site</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-03T14:35:45</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>Testcase description:
+In this testcase it will be checked, if the statistic data in web site for the X54 grinder has the right layout, how it is described in the ticket HE54-201.
+
+Testcase execution:
+X54:
+1. Rotate Jogdial to WIFI
+2. LongPress on Jogdial
+3. Rotate Jogdial to &quot;ON&quot; (OFF, ON ,rSET)
+4. LongPress on Jogdial
+PC:
+1. Activate &quot;Funkverbindung&quot;
+2. Select Grinder xxxxx
+3. Insert password: &quot;home1234&quot;
+4. Establish WIFI connection
+Internet:
+5. Call X54 web site with IP: 192.168.4.1
+6. Select the &quot;SHOW&quot;-Button for &quot;System statistics&quot;
+
+Expected result:
+X54:
+1. The WIFI-Icon is highlighted
+2. The WIFI-menu is shown
+3. &quot;ON&quot; is adjusted
+4. The WLAN is switched on.
+PC:
+1. &quot;Funkverbindung&quot; is activated
+2. In the list of &quot;Funkverbindung&quot; - grinder is selected
+3. Password is accepted
+4. WIFI connection is established
+Internet:
+5. The X54 webside is displayed with the following layout:
+    1, System statistics   &quot;SHOW&quot; (list + csv representation)
+    2, WEB-Access         &quot;WEB-Icon&quot;
+    3. Event Log              &quot;SHOW&quot; (csv)
+    4. Error Log               &quot;SHOW&quot; (csv) 
+    5. Complete log data &quot;DOWNLOAD&quot;
+6. The system statistic data is representated in a list layout.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-201</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<script type="text/javascript" src="zepto.min.js"></script>
+<script language="javascript" type="text/javascript">
+var output;
+var websocket = null;
+var nMsgId = 0;
+function init()
+{
+output = document.getElementById( "output" );
+var idUriAp = document.getElementById( "uri_ap" );
+var idUriSta = document.getElementById( "uri_sta" );
+var idUriHostname = document.getElementById( "uri_hostname" );
+var idUriMdns = document.getElementById( "uri_mdns" );
+var apIp = "var_currentApIp";
+var staIp = "var_currentStaIp";
+var hostname = "var_hostName";
+if ( apIp != "" )
+{
+idUriAp.value = "ws://" + apIp + ":9998";
+}
+else
+{
+idUriAp.value = "";
+}
+if ( staIp != "" )
+{
+idUriSta.value = "ws://" + staIp + ":9998";
+}
+else
+{
+idUriSta.value = "";
+}
+if ( hostname != "" )
+{
+idUriHostname.value = "ws://" + hostname + ":9998";
+idUriMdns.value = "ws://" + hostname + ".local:9998";
+}
+else
+{
+idUriHostname.value = "";
+idUriMdns.value = "";
+}
+}
+function openWebSocket( uri )
+{
+if ( websocket )
+websocket.close();
+writeToScreen( "Try connect to " + uri );
+websocket           = new WebSocket( uri );
+websocket.onopen    = function(evt) { onOpen(evt) };
+websocket.onclose   = function(evt) { onClose(evt) };
+websocket.onmessage = function(evt) { onMessage(evt) };
+websocket.onerror   = function(evt) { onError(evt) };
+}
+function onOpen(evt)
+{
+writeToScreen( "CONNECTED" );
+}
+function onClose(evt)
+{
+writeToScreen( "DISCONNECTED" );
+}
+function onMessage(evt)
+{
+writeToScreen( 'MESSAGE RECEIVED: ' + evt.data );
+var json = JSON.parse( evt.data );
+document.getElementById( "MsgId" ).value = json.MsgId;
+document.getElementById( "SessionId" ).value = json.SessionId;
+if ( json.ResponseStatus != null )
+{
+if ( json.ResponseStatus.Success )
+{
+document.getElementById( "Success" ).value = "Ok";
+document.getElementById( "Success" ).style = "background-color:green;color:white;";
+}
+else
+{
+document.getElementById( "Success" ).value = "Error";
+document.getElementById( "Success" ).style = "background-color:red;color:white;";
+}
+document.getElementById( "Reason" ).value = json.ResponseStatus.Reason;
+}
+else
+{
+document.getElementById( "Success" ).value = "";
+document.getElementById( "Success" ).style = "";
+document.getElementById( "Reason" ).value  = "";
+}
+if ( json.GrinderName != null )
+{
+document.getElementById( "GrinderName" ).value = json.GrinderName;
+}
+else if ( json.AutoSleepTime != null )
+{
+document.getElementById( "AutoSleepTime" ).value = json.AutoSleepTime;
+}
+else if ( json.MachineInfo != null )
+{
+document.getElementById( "SerialNo" ).value = json.MachineInfo.SerialNo;
+document.getElementById( "ProductNo" ).value = json.MachineInfo.ProductNo;
+document.getElementById( "SwVersion" ).value = json.MachineInfo.SwVersion;
+document.getElementById( "SwBuildNo" ).value = json.MachineInfo.SwBuildNo;
+document.getElementById( "DiscLifeTime" ).value = Math.ceil( json.MachineInfo.DiscLifeTime / 36000.0 ) + " hrs";
+document.getElementById( "Hostname" ).value = json.MachineInfo.Hostname;
+document.getElementById( "ApMacAddress" ).value = json.MachineInfo.ApMacAddress;
+document.getElementById( "CurrentApIpv4" ).value = json.MachineInfo.CurrentApIpv4;
+document.getElementById( "StaMacAddress" ).value = json.MachineInfo.StaMacAddress;
+document.getElementById( "CurrentStaIpv4" ).value = json.MachineInfo.CurrentStaIpv4;
+}
+else if ( json.WifiConfig != null )
+{
+document.getElementById( "WifiMode" ).value = json.WifiConfig.WifiMode;
+document.getElementById( "ApSsid" ).value = json.WifiConfig.ApSsid;
+document.getElementById( "ApPassword" ).value = json.WifiConfig.ApPassword;
+document.getElementById( "ApIp4" ).value = json.WifiConfig.ApIp4;
+document.getElementById( "StaSsid" ).value = json.WifiConfig.StaSsid;
+document.getElementById( "StaPassword" ).value = json.WifiConfig.StaPassword;
+document.getElementById( "WifiStationModeDhcp" ).checked = json.WifiConfig.StaDhcp;
+document.getElementById( "WifiStationModeStatic" ).checked = !json.WifiConfig.StaDhcp;
+document.getElementById( "StaStaticIp4" ).value = json.WifiConfig.StaStaticIp4;
+document.getElementById( "StaGateway" ).value = json.WifiConfig.StaGateway;
+document.getElementById( "StaNetmask" ).value = json.WifiConfig.StaNetmask;
+document.getElementById( "StaDns" ).value = json.WifiConfig.StaDns;
+}
+else if ( json.WifiInfo != null )
+{
+document.getElementById( "InfoWifiMode" ).value = json.WifiInfo.WifiMode;
+document.getElementById( "InfoApMacAddress" ).value = json.WifiInfo.ApMacAddress;
+document.getElementById( "InfoCurrentApIpv4" ).value = json.WifiInfo.CurrentApIpv4;
+document.getElementById( "InfoStaMacAddress" ).value = json.WifiInfo.StaMacAddress;
+document.getElementById( "InfoCurrentStaIpv4" ).value = json.WifiInfo.CurrentStaIpv4;
+}
+else if ( json.WifiScanResults != null )
+{
+document.getElementById( "WifiScanResultsSuccess" ).value = json.WifiScanResults.Success;
+document.getElementById( "WifiScanResultsCount" ).value = json.WifiScanResults.List.length;
+var results = "";
+for ( var i = 0; i < json.WifiScanResults.List.length; i++ )
+{
+results += json.WifiScanResults.List[i].Ssid + ";" + json.WifiScanResults.List[i].Rssi + "\n";
+}
+document.getElementById( "WifiScanResultsList" ).value = results;
+}
+else if ( json.RecipeList != null )
+{
+for ( i = 0; i < 4; i++ )
+{
+var no = json.RecipeList[i].RecipeNo;
+var prefix = "Recipe" + no;
+document.getElementById( prefix +"GrindTime" ).value = json.RecipeList[i].GrindTime;
+document.getElementById( prefix +"Name" ).value = json.RecipeList[i].Name;
+document.getElementById( prefix +"BeanName" ).value = json.RecipeList[i].BeanName;
+document.getElementById( prefix +"GrindingDegree" ).value = json.RecipeList[i].GrindingDegree;
+document.getElementById( prefix +"BrewingType" ).value = json.RecipeList[i].BrewingType;
+document.getElementById( prefix +"Guid" ).value = json.RecipeList[i].Guid;
+document.getElementById( prefix +"LastModifyIndex" ).value = json.RecipeList[i].LastModifyIndex;
+document.getElementById( prefix +"LastModifyTime" ).value = json.RecipeList[i].LastModifyTime;
+}
+}
+else if ( json.Recipe != null )
+{
+var no = json.Recipe.RecipeNo;
+var prefix = "Recipe" + no;
+document.getElementById( prefix +"GrindTime" ).value = json.Recipe.GrindTime;
+document.getElementById( prefix +"Name" ).value = json.Recipe.Name;
+document.getElementById( prefix +"BeanName" ).value = json.Recipe.BeanName;
+document.getElementById( prefix +"GrindingDegree" ).value = json.Recipe.GrindingDegree;
+document.getElementById( prefix +"BrewingType" ).value = json.Recipe.BrewingType;
+document.getElementById( prefix +"Guid" ).value = json.Recipe.Guid;
+document.getElementById( prefix +"LastModifyIndex" ).value = json.Recipe.LastModifyIndex;
+document.getElementById( prefix +"LastModifyTime" ).value = json.Recipe.LastModifyTime;
+}
+else if ( json.SystemStatus != null )
+{
+if ( json.SystemStatus.GrindRunning )
+{
+document.getElementById( "GrindRunning" ).value = "Yes";
+document.getElementById( "GrindRunning" ).style = "background-color:red;color:white;";
+}
+else
+{
+document.getElementById( "GrindRunning" ).value = "No";
+document.getElementById( "GrindRunning" ).style = "background-color:green;color:white;";
+}
+document.getElementById( "ErrorCode" ).value = json.SystemStatus.ErrorCode;
+if ( json.SystemStatus.ErrorCode === "" )
+{
+document.getElementById( "ErrorCode" ).style = "background-color:green;color:white;";
+}
+else
+{
+document.getElementById( "ErrorCode" ).style = "background-color:red;color:white;";
+}
+document.getElementById( "ActiveMenu" ).value = json.SystemStatus.ActiveMenu;
+document.getElementById( "GrindTimeMs" ).value = json.SystemStatus.GrindTimeMs;
+}
+}
+function onError(evt)
+{
+writeToScreen( 'ERROR: ' + evt.data );
+}
+function doSend( message )
+{
+writeToScreen( "SEND: " + message );
+websocket.send(message);
+}
+function doSendJson( json )
+{
+json.MsgId = ++nMsgId;
+doSend( JSON.stringify( json, undefined, 4 ) );
+}
+function writeToScreen( message )
+{
+output.value = message + "\n" + output.value;
+}
+window.addEventListener( "load", init, false );
+</script>
+</head>
+<body>
+<h2>WebSocket Test</h2>
+<table cellpadding="10">
+<tr valign="top">
+<td>
+<table border="1">
+<tr>
+<td></td>
+<td>
+</td>
+<td>
+<button id="disconnect">Disconnect</button>
+<script>
+$( "#disconnect" ).on( "click", function()
+{
+if ( websocket )
+{
+websocket.close();
+websocket = null;
+}
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>URI (AP)</td>
+<td>
+<input type="text" id="uri_ap">
+<a href="http://var_currentApIp/x54_websocket_test.html">Test site</a>
+</td>
+<td>
+<button id="connect_ap">Connect</button></br>
+<script>
+$( "#connect_ap" ).on( "click", function()
+{
+openWebSocket( $( "#uri_ap" ).val() );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>URI (STA)</td>
+<td>
+<input type="text" id="uri_sta">
+<a href="http://var_currentStaIp/x54_websocket_test.html">Test site</a>
+</td>
+<td>
+<button id="connect_sta">Connect</button></br>
+<script>
+$( "#connect_sta" ).on( "click", function()
+{
+openWebSocket( $( "#uri_sta" ).val() );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>URI (mDNS)</td>
+<td>
+<input type="text" id="uri_mdns">
+<a href="http://var_hostName.local/x54_websocket_test.html">Test site</a>
+</td>
+<td>
+<button id="connect_mdns">Connect</button></br>
+<script>
+$( "#connect_mdns" ).on( "click", function()
+{
+openWebSocket( $( "#uri_mdns" ).val() );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>URI (hostname)</td>
+<td>
+<input type="text" id="uri_hostname">
+<a href="http://var_hostName/x54_websocket_test.html">Test site</a>
+</td>
+<td>
+<button id="connect_hostname">Connect</button></br>
+<script>
+$( "#connect_hostname" ).on( "click", function()
+{
+openWebSocket( $( "#uri_hostname" ).val() );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Response Msg ID</td>
+<td>
+<input type="text" id="MsgId" readonly /></br>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Session ID</td>
+<td>
+<input type="text" id="SessionId" /></br>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Response Status</td>
+<td>
+Success: <input type="text" id="Success" readonly /></br>
+Reason: <input type="text" id="Reason" readonly /></br>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>Request Data</td>
+<td>
+<select id="RequestType">
+<option value="GrinderName">Grinder name</option>
+<option value="RecipeList">Recipe list</option>
+<option value="Recipe1">Recipe 1</option>
+<option value="Recipe2">Recipe 2</option>
+<option value="Recipe3">Recipe 3</option>
+<option value="Recipe4">Recipe 4</option>
+<option value="MachineInfo">Machine info</option>
+<option value="AutoSleepTime">Auto Sleep time</option>
+<option value="SystemStatus">System status</option>
+<option value="WifiConfig">WiFi config</option>
+<option value="WifiInfo">WiFi info</option>
+</select>
+</td>
+<td>
+<button id="requestRequestType">Request</button></br>
+<script>
+$( "#requestRequestType" ).on( "click", function()
+{
+var idSelection = document.getElementById( "RequestType" ).value;
+json = {};
+json.RequestType = idSelection;
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Command</td>
+<td>
+<select id="ExecCmd">
+<option value="RestartDevice">Restart Device</option>
+<option value="ResetWifi">Reset Wifi</option>
+<option value="ResetDiscLifeTime">Reset disc life time</option>
+<option value="FactoryReset">Factory reset</option>
+<option value="ResetStatistics">Reset statistics</option>
+<option value="Logout">Logout</option>
+<option value="ScanAccessPoints">Scan for Access Points</option>
+</select>
+</td>
+<td>
+<button id="sendExecCmd">Send</button></br>
+<script>
+$( "#sendExecCmd" ).on( "click", function()
+{
+var idSelection = document.getElementById( "ExecCmd" ).value;
+json = {};
+json.ExecCmd = idSelection;
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>WiFi configuration</td>
+<td>
+<label for="WifiMode">WiFi Mode</label>
+<select name="WifiMode" id="WifiMode" readonly>
+<option value="0">AP</option>
+<option value="1">STA</option>
+<option value="2">AP/STA</option>
+</select></br>
+AP SSID: <input type="text" id="ApSsid"></br>
+AP Password: <input type="text" id="ApPassword"></br>
+AP IP4: <input type="text" id="ApIp4"></br>
+STA SSID: <input type="text" id="StaSsid"></br>
+STA Password: <input type="text" id="StaPassword"></br>
+<input type="radio" id="WifiStationModeDhcp" name="StaDhcp" value="dhcp">
+<label for="WifiStationModeDhcp">DHCP</label></br>
+<input type="radio" id="WifiStationModeStatic" name="StaDhcp" value="static">
+<label for="WifiStationModeStatic">Static IP</label></br>
+Static IP4: <input type="text" id="StaStaticIp4"></br>
+Gateway: <input type="text" id="StaGateway"></br>
+Netmask: <input type="text" id="StaNetmask"></br>
+DNS: <input type="text" id="StaDns"></br>
+</td>
+<td>
+<button id="sendWifiConfig">Send</button></br>
+<script>
+$( "#sendWifiConfig" ).on( "click", function()
+{
+json = {};
+json.WifiConfig = {};
+json.WifiConfig.WifiMode = parseInt( $( "#WifiMode" ).val() );
+json.WifiConfig.ApSsid = $( "#ApSsid" ).val();
+json.WifiConfig.ApPassword = $( "#ApPassword" ).val();
+json.WifiConfig.ApIp4 = $( "#ApIp4" ).val();
+json.WifiConfig.StaSsid = $( "#StaSsid" ).val();
+json.WifiConfig.StaPassword = $( "#StaPassword" ).val();
+json.WifiConfig.StaDhcp = ( $( "input[name='StaDhcp']:checked" ).val() === "dhcp" );
+json.WifiConfig.StaStaticIp4 = $( "#StaStaticIp4" ).val();
+json.WifiConfig.StaGateway = $( "#StaGateway" ).val();
+json.WifiConfig.StaNetmask = $( "#StaNetmask" ).val();
+json.WifiConfig.StaDns = $( "#StaDns" ).val();
+doSendJson( json );
+});
+</script>
+<button id="requestWifiConfig">Request</button></br>
+<script>
+$( "#requestWifiConfig" ).on( "click", function()
+{
+json = {};
+json.RequestType = "WifiConfig";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>WiFi Info</td>
+<td>
+<label for="InfoWifiMode">WiFi Mode</label>
+<select name="InfoWifiMode" id="InfoWifiMode">
+<option value="0">AP</option>
+<option value="1">STA</option>
+<option value="2">AP/STA</option>
+</select></br>
+AP MAC Address: <input type="text" id="InfoApMacAddress" readonly></br>
+Current AP IPv4: <input type="text" id="InfoCurrentApIpv4" readonly></br>
+STA MAC Address: <input type="text" id="InfoStaMacAddress" readonly></br>
+Current STA IPv4: <input type="text" id="InfoCurrentStaIpv4" readonly></br>
+</td>
+<td>
+<button id="requestWifiInfo">Request</button></br>
+<script>
+$( "#requestWifiInfo" ).on( "click", function()
+{
+json = {};
+json.RequestType = "WifiInfo";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Auto Sleep Time</td>
+<td>
+<select id="AutoSleepTime">
+<option value="180">3 min</option>
+<option value="300">5 min</option>
+<option value="600">10 min</option>
+<option value="1200">20 min</option>
+<option value="1800">30 min</option>
+</select>
+</td>
+<td>
+<button id="sendAutoSleepTime">Send</button></br>
+<script>
+$( "#sendAutoSleepTime" ).on( "click", function()
+{
+var idSelection = document.getElementById( "AutoSleepTime" ).value;
+json = {};
+json.AutoSleepTime = parseInt( $( "#AutoSleepTime" ).val() );
+doSendJson( json );
+});
+</script>
+<button id="requestAutoSleepTime">Request</button></br>
+<script>
+$( "#requestAutoSleepTime" ).on( "click", function()
+{
+json = {};
+json.RequestType = "AutoSleepTime";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Grinder Name</td>
+<td>
+<input type="text" id="GrinderName"></br>
+</td>
+<td>
+<button id="sendGrinderName">Send</button></br>
+<script>
+$( "#sendGrinderName" ).on( "click", function()
+{
+json = {};
+json.GrinderName = $( "#GrinderName" ).val();
+doSendJson( json );
+});
+</script>
+<button id="requestGrinderName">Request</button></br>
+<script>
+$( "#requestGrinderName" ).on( "click", function()
+{
+json = {};
+json.RequestType = "GrinderName";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Scan WiFi Access Points</td>
+<td>
+Success: <input type="text" id="WifiScanResultsSuccess" readonly></br>
+Count: <input type="text" id="WifiScanResultsCount" readonly></br>
+List: <textarea type="text" id="WifiScanResultsList" readonly></textarea>
+</td>
+<td>
+<button id="requestScanAccessPoints">Request</button></br>
+<script>
+$( "#requestScanAccessPoints" ).on( "click", function()
+{
+json = {};
+json.ExecCmd = "ScanAccessPoints";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>System Status</td>
+<td>
+Grind Running: <input type="text" id="GrindRunning" readonly></br>
+Error Code: <input type="text" id="ErrorCode" readonly></br>
+Active menu: <input type="text" id="ActiveMenu" readonly></br>
+Grind time [ms]: <input type="text" id="GrindTimeMs" readonly></br>
+</td>
+<td>
+<button id="requestSystemStatus">Request</button></br>
+<script>
+$( "#requestSystemStatus" ).on( "click", function()
+{
+json = {};
+json.RequestType = "SystemStatus";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Machine Info</td>
+<td>
+Serial No: <input type="text" id="SerialNo" readonly></br>
+Product No: <input type="text" id="ProductNo" readonly></br>
+SW Version: <input type="text" id="SwVersion" readonly></br>
+SW Build No: <input type="text" id="SwBuildNo" readonly></br>
+Disc Life Time: <input type="text" id="DiscLifeTime" readonly></br>
+Hostname: <input type="text" id="Hostname" readonly></br>
+AP MAC Address: <input type="text" id="ApMacAddress" readonly></br>
+Current AP IPv4: <input type="text" id="CurrentApIpv4" readonly></br>
+STA MAC Address: <input type="text" id="StaMacAddress" readonly></br>
+Current STA IPv4: <input type="text" id="CurrentStaIpv4" readonly></br>
+</td>
+<td>
+<button id="requestMachineInfo">Request</button></br>
+<script>
+$( "#requestMachineInfo" ).on( "click", function()
+{
+json = {};
+json.RequestType = "MachineInfo";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Login</td>
+<td>
+<input type="text" id="Login" value=""/></br>
+</td>
+<td>
+<button id="sendLogin">Send</button></br>
+<script>
+$( "#sendLogin" ).on( "click", function()
+{
+json = {};
+json.Login = $( "#Login" ).val();
+doSendJson( json );
+});
+</script>
+<button id="sendLogout">Logout</button></br>
+<script>
+$( "#sendLogout" ).on( "click", function()
+{
+json = {};
+json.ExecCmd = "Logout";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Change Password</td>
+<td>
+<input type="text" id="ChangePwd" /></br>
+</td>
+<td>
+<button id="sendChangePwd">Send</button></br>
+<script>
+$( "#sendChangePwd" ).on( "click", function()
+{
+json = {};
+json.ChangePwd = $( "#ChangePwd" ).val();
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+</table>
+</td>
+<td>
+<table border="1">
+<tr>
+<td colspan="2">Recipe List</td>
+<td>
+<!-- <button id="sendRecipeList">Send</button></br>
+<script>
+$( "#sendRecipeList" ).on( "click", function()
+{
+json = {};
+json.RecipeList = [];
+for ( i = 0; i < 4; i++ )
+{
+json.RecipeList[i] = {};
+var prefix = "#Recipe" + (i+1);
+json.RecipeList[i].RecipeNo        = i+1;
+json.RecipeList[i].GrindTime       = parseInt( $( prefix + "GrindTime" ).val() );
+json.RecipeList[i].Name            = $( prefix + "Name" ).val();
+json.RecipeList[i].BeanName        = $( prefix + "BeanName" ).val();
+json.RecipeList[i].GrindingDegree  = parseInt( $( prefix + "GrindingDegree" ).val() );
+json.RecipeList[i].BrewingType     = parseInt( $( prefix + "BrewingType" ).val() );
+json.RecipeList[i].Guid            = $( prefix + "Guid" ).val();
+json.RecipeList[i].LastModifyIndex = parseInt( $( prefix + "LastModifyIndex" ).val() );
+json.RecipeList[i].LastModifyTime  = parseInt( $( prefix + "LastModifyTime" ).val() );
+}
+doSendJson( json );
+});
+</script>
+-->
+<button id="requestRecipeList">Request</button></br>
+<script>
+$( "#requestRecipeList" ).on( "click", function()
+{
+json = {};
+json.RequestType = "RecipeList";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="background-color:lightgrey;">Recipe 1</td>
+<td>
+<button id="sendRecipe1">Send</button></br>
+<script>
+$( "#sendRecipe1" ).on( "click", function()
+{
+json = {};
+json.Recipe = {};
+var prefix = "#Recipe1";
+json.Recipe.RecipeNo        = 1;
+json.Recipe.GrindTime       = parseInt( $( prefix + "GrindTime" ).val() );
+json.Recipe.Name            = $( prefix + "Name" ).val();
+json.Recipe.BeanName        = $( prefix + "BeanName" ).val();
+json.Recipe.GrindingDegree  = parseInt( $( prefix + "GrindingDegree" ).val() );
+json.Recipe.BrewingType     = parseInt( $( prefix + "BrewingType" ).val() );
+json.Recipe.Guid            = $( prefix + "Guid" ).val();
+json.Recipe.LastModifyIndex = parseInt( $( prefix + "LastModifyIndex" ).val() );
+json.Recipe.LastModifyTime  = parseInt( $( prefix + "LastModifyTime" ).val() );
+doSendJson( json );
+});
+</script>
+<button id="requestRecipe1">Request</button></br>
+<script>
+$( "#requestRecipe1" ).on( "click", function()
+{
+json = {};
+json.RequestType = "Recipe1";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Pos.</td>
+<td>
+1
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grind Time</td>
+<td>
+<input type="text" id="Recipe1GrindTime" />
+</td>
+<td>1/10sec</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>
+<input type="text" id="Recipe1Name" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Bean Name</td>
+<td>
+<input type="text" id="Recipe1BeanName" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grinding Degree</td>
+<td>
+<input type="text" id="Recipe1GrindingDegree" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Brewing Type</td>
+<td>
+<input type="text" id="Recipe1BrewingType" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>GUID</td>
+<td>
+<input type="text" id="Recipe1Guid" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Index</td>
+<td>
+<input type="text" id="Recipe1LastModifyIndex" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Time</td>
+<td>
+<input type="text" id="Recipe1LastModifyTime" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2" style="background-color:lightgrey;">Recipe 2</td>
+<td>
+<button id="sendRecipe2">Send</button></br>
+<script>
+$( "#sendRecipe2" ).on( "click", function()
+{
+json = {};
+json.Recipe = {};
+var prefix = "#Recipe2";
+json.Recipe.RecipeNo        = 2;
+json.Recipe.GrindTime       = parseInt( $( prefix + "GrindTime" ).val() );
+json.Recipe.Name            = $( prefix + "Name" ).val();
+json.Recipe.BeanName        = $( prefix + "BeanName" ).val();
+json.Recipe.GrindingDegree  = parseInt( $( prefix + "GrindingDegree" ).val() );
+json.Recipe.BrewingType     = parseInt( $( prefix + "BrewingType" ).val() );
+json.Recipe.Guid            = $( prefix + "Guid" ).val();
+json.Recipe.LastModifyIndex = parseInt( $( prefix + "LastModifyIndex" ).val() );
+json.Recipe.LastModifyTime  = parseInt( $( prefix + "LastModifyTime" ).val() );
+doSendJson( json );
+});
+</script>
+<button id="requestRecipe2">Request</button></br>
+<script>
+$( "#requestRecipe2" ).on( "click", function()
+{
+json = {};
+json.RequestType = "Recipe2";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Pos.</td>
+<td>
+2
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grind Time</td>
+<td>
+<input type="text" id="Recipe2GrindTime" />
+</td>
+<td>1/10sec</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>
+<input type="text" id="Recipe2Name" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Bean Name</td>
+<td>
+<input type="text" id="Recipe2BeanName" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grinding Degree</td>
+<td>
+<input type="text" id="Recipe2GrindingDegree" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Brewing Type</td>
+<td>
+<input type="text" id="Recipe2BrewingType" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>GUID</td>
+<td>
+<input type="text" id="Recipe2Guid" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Index</td>
+<td>
+<input type="text" id="Recipe2LastModifyIndex" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Time</td>
+<td>
+<input type="text" id="Recipe2LastModifyTime" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2" style="background-color:lightgrey;">Recipe 3</td>
+<td>
+<button id="sendRecipe3">Send</button></br>
+<script>
+$( "#sendRecipe3" ).on( "click", function()
+{
+json = {};
+json.Recipe = {};
+var prefix = "#Recipe3";
+json.Recipe.RecipeNo        = 3;
+json.Recipe.GrindTime       = parseInt( $( prefix + "GrindTime" ).val() );
+json.Recipe.Name            = $( prefix + "Name" ).val();
+json.Recipe.BeanName        = $( prefix + "BeanName" ).val();
+json.Recipe.GrindingDegree  = parseInt( $( prefix + "GrindingDegree" ).val() );
+json.Recipe.BrewingType     = parseInt( $( prefix + "BrewingType" ).val() );
+json.Recipe.Guid            = $( prefix + "Guid" ).val();
+json.Recipe.LastModifyIndex = parseInt( $( prefix + "LastModifyIndex" ).val() );
+json.Recipe.LastModifyTime  = parseInt( $( prefix + "LastModifyTime" ).val() );
+doSendJson( json );
+});
+</script>
+<button id="requestRecipe3">Request</button></br>
+<script>
+$( "#requestRecipe3" ).on( "click", function()
+{
+json = {};
+json.RequestType = "Recipe3";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Pos.</td>
+<td>
+3
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grind Time</td>
+<td>
+<input type="text" id="Recipe3GrindTime" />
+</td>
+<td>1/10sec</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>
+<input type="text" id="Recipe3Name" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Bean Name</td>
+<td>
+<input type="text" id="Recipe3BeanName" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grinding Degree</td>
+<td>
+<input type="text" id="Recipe3GrindingDegree" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Brewing Type</td>
+<td>
+<input type="text" id="Recipe3BrewingType" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>GUID</td>
+<td>
+<input type="text" id="Recipe3Guid" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Index</td>
+<td>
+<input type="text" id="Recipe3LastModifyIndex" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Time</td>
+<td>
+<input type="text" id="Recipe3LastModifyTime" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2" style="background-color:lightgrey;">Recipe 4</td>
+<td>
+<button id="sendRecipe4">Send</button></br>
+<script>
+$( "#sendRecipe4" ).on( "click", function()
+{
+json = {};
+json.Recipe = {};
+var prefix = "#Recipe4";
+json.Recipe.RecipeNo        = 4;
+json.Recipe.GrindTime       = parseInt( $( prefix + "GrindTime" ).val() );
+json.Recipe.Name            = $( prefix + "Name" ).val();
+json.Recipe.BeanName        = $( prefix + "BeanName" ).val();
+json.Recipe.GrindingDegree  = parseInt( $( prefix + "GrindingDegree" ).val() );
+json.Recipe.BrewingType     = parseInt( $( prefix + "BrewingType" ).val() );
+json.Recipe.Guid            = $( prefix + "Guid" ).val();
+json.Recipe.LastModifyIndex = parseInt( $( prefix + "LastModifyIndex" ).val() );
+json.Recipe.LastModifyTime  = parseInt( $( prefix + "LastModifyTime" ).val() );
+doSendJson( json );
+});
+</script>
+<button id="requestRecipe4">Request</button></br>
+<script>
+$( "#requestRecipe4" ).on( "click", function()
+{
+json = {};
+json.RequestType = "Recipe4";
+doSendJson( json );
+});
+</script>
+</td>
+</tr>
+<tr>
+<td>Pos.</td>
+<td>
+4
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grind Time</td>
+<td>
+<input type="text" id="Recipe4GrindTime" />
+</td>
+<td>1/10sec</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>
+<input type="text" id="Recipe4Name" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Bean Name</td>
+<td>
+<input type="text" id="Recipe4BeanName" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Grinding Degree</td>
+<td>
+<input type="text" id="Recipe4GrindingDegree" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Brewing Type</td>
+<td>
+<input type="text" id="Recipe4BrewingType" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>GUID</td>
+<td>
+<input type="text" id="Recipe4Guid" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Index</td>
+<td>
+<input type="text" id="Recipe4LastModifyIndex" />
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Last Modify Time</td>
+<td>
+<input type="text" id="Recipe4LastModifyTime" />
+</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</td>
+<td>
+<h3>Log Area:</h3>
+<textarea id="output" rows="50" cols="80"></textarea></br>
+<button id="sendClearLog">Clear</button></br>
+<script>
+$( "#sendClearLog" ).on( "click", function()
+{
+$( "#output" ).val( "" );
+});
+</script>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>038364c7-6eb7-4fd2-9da4-a684d2102652</Id>
+	<Name>Event SW-Update SWUPDATE</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-22T13:11:46</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>Testcase description:
+In this testcase it will be checked if the event SW-Update is in the event log.
+
+Precondition:
+1. The X54 WiFi connection is established.
+( The access to X54 web interface is described in Testcase: StatisticDataRepresentationInWebSite )
+2. Execute Testcase: SW-Update via WiFi connection
+
+Testcase execution:
+1. Select SHOW for Event log in X54 web site.
+
+
+Expected result:
+The event for SW-Update is added to the event log.
+e.g.: 
+3;1970-01-01T00:05:32;SWUPDATE;&quot;V03.02&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-9</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

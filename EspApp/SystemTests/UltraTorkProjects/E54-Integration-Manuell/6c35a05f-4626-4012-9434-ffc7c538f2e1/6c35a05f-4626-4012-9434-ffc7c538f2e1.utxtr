@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>6c35a05f-4626-4012-9434-ffc7c538f2e1</Id>
+	<Name>UpdateTheFirmware</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-02-21T16:48:16</Created>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>M120 / RC6</SwVersion>
+	<ExecutionStartTime>2020-02-24T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2020-02-24T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2020-02-24
+Remarks:
+None</Report>
+	<Description>In this test case the update of the firmware via wifi will be checked.
+
+**Initial state of the test**
+The grinder is switched on. 
+
+**Test steps**
+(a) Download the desired *.bin file from the Jenkins server
+(b) Make sure that wifi is on and E54Grinder-9425AA network is connected
+(c) Select the downloaded *.bin file on the wifi web interface
+(d) Start the update</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-12</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

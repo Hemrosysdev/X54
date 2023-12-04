@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>52c5a2ed-365f-418a-823e-c4b03476a32c</Id>
+	<Name>Reset WIFI connection</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-03-18T08:51:28</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>Testcase description:
+In this testcase it will be checked if the WIFI connection can be reseted after the user make a LongPess  in WIFI position (icon) and rotate the Jogdial to rSET position.
+
+Precondition:
+The WIFI connection is ON
+
+Testcase execution:
+1. Select WIFI position with rotate the Jogdial.
+2. LongPress the Jogdial
+3. Rotate the Jogdial to rSET postion.
+4. LongPress Jogdial
+5. Switch on the WIFI connection again
+6. Check in the Event log  the added WIFI Events  with the X54 web interface.
+
+Expected result:
+1. The WIFI icon is highlighted.
+2. The WIFI mode is activated to set OFF, ON, rSET
+3. The position rSET is displayed.
+4. The WIFI connection is OFF after reset
+5. The WIFI connection is established.
+6. The following Events are displayed:
+After WIFI=rSET
+52;1970-01-01T04:52:28;GRWIFICFG;&quot;Reset&quot;
+52;1970-01-01T04:52:29;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T04:52:29;WIFIAP;&quot;Stop&quot;
+After WIFI=ON
+52;1970-01-01T04:52:38;GRWIFICFG;&quot;On&quot;
+52;1970-01-01T04:52:38;WIFIAP;&quot;Start&quot;
+52;1970-01-01T04:52:39;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-365</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

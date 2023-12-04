@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>ac3dac2c-6b3f-439d-85fb-78a9f263c96e</Id>
+	<Name>E004_DisplayLED</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-02-20T14:43:56</Created>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>M120 / RC6</SwVersion>
+	<ExecutionStartTime>2020-02-24T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2020-02-24T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2020-02-24
+Remarks:
+None</Report>
+	<Description>Error E004 occures when any single display LED is broken or has a shortcut.
+In this test case the behaviour of this error will be checked, namely:
+- if the error will be listed in the log output of Errors on Hemro HE54 web interface
+  (it should not be displayed)
+- if the grinder is operable in manual grind mode during the error is active
+  (it should be operable)
+- if the affected LED is dark
+
+**Initial state of the test**
+The grinder is switched on.
+
+**Test steps**
+(a) Expose the LEDs
+(b) Stimulate a shortcut on any LED, for example with a tweezer
+(c) Check if the affected LED is dark
+(d) Start manual grinding during the shortcut is active  
+    => time will start to count up
+(e) Check if the shortcut event of the affected LED is listed in the error log output on Hemro HE54 web interface</Description>
+	<Implementation>HE54-26</Implementation>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-10</RequirementLink>
+		<RequirementLink>HE54-27</RequirementLink>
+		<RequirementLink>HE54-28</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

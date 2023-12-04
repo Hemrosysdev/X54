@@ -1,0 +1,39 @@
+[Common]
+DocCreateTimeout=300
+DocExtension=rtf
+EditorApp=geany
+FolderCreation=true
+OpenResultApp=firefox
+PostBuildCommands=rm %DEST%/HE54_TestSpezifikation/tc-descriptions/UltraTorkTestcase.rst\npython %DEST%/HE54_TestSpezifikation/GenDoc.py -C %DEST%/HE54_TestSpezifikation\n\n
+PreBuildCommands=rm -rf %DEST%/HE54_TestSpezifikation\ncp -r %SOURCEDIR%/HE54_TestSpezifikation %DEST%\n
+ResultFile=%DEST%/HE54_Testspezifikation/Doc/html/index.html
+SourceDir=SphinxDoc
+
+[FrameDocs]
+FrameDoc0=SphinxDoc/HE54_TestSpezifikation/source/list-of-testcase-chapters.rst
+FrameDoc1=SphinxDoc/HE54_TestSpezifikation/source/list-of-testcase-ids.rst
+FrameDoc2=SphinxDoc/HE54_TestSpezifikation/source/list-of-testcase-list.rst
+FrameDoc3=SphinxDoc/HE54_TestSpezifikation/source/testcase-configuration.rst
+FrameDoc4=SphinxDoc/HE54_TestSpezifikation/source/conf.py
+FrameDoc5=SphinxDoc/HE54_TestSpezifikation/source/themes/latex-styles/ux-latex.sty
+FrameDoc6=SphinxDoc/HE54_TestSpezifikation/source/traceability-matrix.rst
+FrameDoc7=SphinxDoc/HE54_TestSpezifikation/tc-descriptions/UltraTorkTestcase.rst
+FrameDoc8=SphinxDoc/HE54_TestSpezifikation/source/requirement-list.rst
+
+[TagDefs]
+Begin=UT_
+CharConversion="\\n=\\n\\n\n"
+End=_
+StyleSheets="Headline1=%TEXT%\\n\nHeadline2=%TEXT%\\n======\nHeadline3=%TEXT%\\n------\nHeadline4=%TEXT%\\n``````\nHeadline5=%TEXT%\\n......\nHeadline6=%TEXT%\\n~~~~~~\nHeadline7=%TEXT%\\n******\nHeadline8=%TEXT%\\n++++++\nHeadline9=%TEXT%\\n^^^^^^"
+
+[UserTags]
+Autor=Karl K\xe4mmerer
+DokumentName=HEM-E54_SystemTest_Specification
+DokumentReferenzen=n/a
+DokumentVersion=210_001
+DokumentVersion2=210\\_001
+HardwareVersion=HEM-E54-HMI-P01c205
+Kundenname=HEMRO
+Projekt=HE54
+SoftwareVersion=HEM-X54-HMI-S01 V02.02
+TestSoftwareVersion=UX-EES-TSFW_04_02_00

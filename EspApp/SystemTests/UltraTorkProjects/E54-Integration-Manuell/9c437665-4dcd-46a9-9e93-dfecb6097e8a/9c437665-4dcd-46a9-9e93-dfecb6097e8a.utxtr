@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>9c437665-4dcd-46a9-9e93-dfecb6097e8a</Id>
+	<Name>Standby wake up with porta filter</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-18T16:02:45</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC5 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-08T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-08T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-08
+Remarks:
+Tested wit real PortaFilter</Report>
+	<Description>Testcase description:
+In this testcase it will be checked if the PortaFilter wakes up the system if the system is in Standby
+
+Testcase execution:
+1. Select manual mode with rotate the Jogdial.
+2. LongPress Jogdial to force Standby
+3. Press the PortaFilter-Button
+
+Expected result:
+1. Manual mode is adjusted
+2. System is in Standby
+3. The system wakes up to normal mode</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-317</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

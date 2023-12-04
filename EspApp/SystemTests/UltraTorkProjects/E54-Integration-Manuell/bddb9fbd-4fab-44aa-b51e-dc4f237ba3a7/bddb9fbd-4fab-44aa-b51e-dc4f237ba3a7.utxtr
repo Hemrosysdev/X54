@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>bddb9fbd-4fab-44aa-b51e-dc4f237ba3a7</Id>
+	<Name>Statistics data increment counters</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-18T08:10:27</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>Testcase description:
+In this testcase it will be checked if the the counters in statistic date are incremented after grinding manual, with recipe 1, recipe 2, recipe 3, recipe 4,
+
+Precondition:
+recipe 1 = 06.0 sec
+recipe 2 = 30.0 sec
+recipe 3 = 20.0 sec
+recipe 4 = 10.0 sec
+WiFi = On
+Call X54 web interface and select SHOW for system statistics to notice the different values 
+for manual mode; recipe 1,2,3,4; Total - Grinds, Shots, DiscLifeTime, TotalMotorOnTime.
+
+Testcase execution:
+1. Select manual mode with rotate the Jogdial -> Press Start/Stop-Button -> After exact 14.0 sec press Start/Stop-Button to stop grinding
+
+2. Select recipe 1 with rotate the Jogdial -> Press Start/Stop-Button
+3. Select recipe 2 with rotate the Jogdial -> Press Start/Stop-Button
+4. Select recipe 3 with rotate the Jogdial -> Press Start/Stop-Button
+5. Select recipe 4 with rotate the Jogdial -> Press Start/Stop-Button
+
+6. Call X54 web interface and select SHOW for system statistics.
+
+Expected result:
+1. The time counts up from 0.0 sec to 14.0 sec
+2. The time for recipe 1 counts down from 06.0 sec to 0.0 sec
+3. The time for recipe 2 counts down from 30.0 sec to 0.0 sec
+4. The time for recipe 3 counts down from 20.0 sec to 0.0 sec
+5. The time for recipe 4 counts down from 10.0 sec to 0.0 sec
+
+6. In system statistics are following counters incremented (changed)
+Num of Total Grind Shots:         +5
+Total Grind Time:                       + 1:20 (80 sec)
+Num of Grind Shots Recipe 1:  +1
+Grind Time Recipe 1:                +0:06
+Num of Grind Shots Recipe 2:  +1
+Grind Time Recipe 2:                +0:30
+Num of Grind Shots Recipe 3:  +1
+Grind Time Recipe 3:                +0:20
+Num of Grind Shots Recipe 4:  +1
+Grind Time Recipe 4:                +0:10
+Num of Grind Shots Manual:    +1
+Manual Mode Grind Time:        +0:14
+Disc Life Time:                          +1:20
+Total Motor On Time                 +1:20</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-11</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

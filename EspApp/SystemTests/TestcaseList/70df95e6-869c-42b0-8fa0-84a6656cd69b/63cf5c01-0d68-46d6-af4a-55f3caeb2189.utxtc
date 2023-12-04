@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>63cf5c01-0d68-46d6-af4a-55f3caeb2189</Id>
+	<Name>E010 Disc lifetime reached</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IN_PROGRESS</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-08T09:48:14</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>This testcase checks disc lifetime reached E010.</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestcase>

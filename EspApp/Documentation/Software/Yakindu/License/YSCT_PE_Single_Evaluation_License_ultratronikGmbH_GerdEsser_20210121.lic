@@ -1,0 +1,27 @@
+FEATURE com_yakindu_sct_standard
+{
+VENDOR=ITEMIS VERSION=21.1 START=2020-12-21 END=2021-01-21 ISSUED=2020-12-21
+LICENSEE="ultratronik GmbH_Gerd Esser, gesser@ultratronik.de"
+COMMENT="YAKINDU SCT Standard Edition (Evaluation) for ultratronik GmbH_Gerd Esser"
+SN="FE21-55D1-0D33-9764"
+KEY=i6VggXbCTVV2stVj5knCPmupXnN4pKQV]E[MHWid6RaWlEUMW08E6]9QIM7LeA4XdFWf4ZkI8G6ekRj49OavAqbANP2Ljxm]jQLD \
+	LzD4zCRoyXxpDXZACYEHbv4hhuqoxbHUv9udgqvkuykHYXZbGB3e2c7n6J4[HCqhej98BcLrovStoI[L5TiqTyAYtWyqEVEFFYof \
+	vfZZMdWzikf9g]V5Wn64woY6Y39uVPWFegcTlhwPoiVagAbQfWe22ouTJ4oRSPpmTXHsOEJpP9yzUkoAgRr8VW1AFd7iI8mo1dA3 \
+	Y8cS11MijPybe8pSi7sgkCXlGCv1DSeXZo5QyD2Eit[[b6QGcBBeq3HsBfjqUQXwYRwsBlr2g]RxJ5xPb2Z[pe6]w3PXV[5Iy73C \
+	SdctPez0YuTl3D0DRiAVbLCtvKmE8xtUonKwujkwtfU76GODy]FQUkmaU2EmJx1xscfQuTaC6AGWqBjBqnjK0oTUh61iaU002tFQ \
+	3H10
+}
+
+FEATURE com_yakindu_sct_professional
+{
+VENDOR=ITEMIS VERSION=21.1 START=2020-12-21 END=2021-01-21 ISSUED=2020-12-21
+LICENSEE="ultratronik GmbH_Gerd Esser, gesser@ultratronik.de"
+COMMENT="YAKINDU SCT Professional Edition (Evaluation) for ultratronik GmbH_Gerd Esser"
+SN="F491-E9CF-E793-AA1B"
+KEY=3LOLdCEJX8]qEOokaTD5k[oUbo7]DljYSbkK]FSJ2XKv70aH2yg9Oog12o3O9IXRWJoqVuQo5wEY66eMoIJmQR][GdvIu1r3XG8g \
+	EgC6D[sV]BIwOKwDJNy07kQItU2j4E9oUUdwX5dbxxsSE2eDSwRVktxwteW6zjGmwCgIuszhS74G]JewXvwC3JSRF5Bgy3A003jQ \
+	xDkfcojOaCrcw]sVPzHAfLqfAr9y4KpjJhSf2g4SC56[kQOLOOvvn4CDqrfvSnnVlKihanl1H7ua0rv]E6UVaQAh5Tq7xpivKs[B \
+	PQh6SjEI7HJuDKQatyqcdGSZ2jS0TTM9f3hrfbpoLPdwXMbhNq2lOVG0]S91VzuwoKFXycp[6TT0vUk3[EjtipULigqqpGtAxTMT \
+	Jh4KHFZhupOOW7W78rnIS5r[FBehQ8VGB6GfXx8MpGsgk]ZO9ep5WZBHyeBf40hPIRDTuwMGpLvgY]326ATj088m3tovFZDdDouk \
+	NIL*
+}

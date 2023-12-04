@@ -1,0 +1,14 @@
+[ConfigFiles]
+File0=../Configuration/E54-Integration-Manuell.dat
+
+[DocumentSpecifications]
+E54-Testreport=E54-Testreport.utdocspec
+E54-Testspezifikation=E54-Testspezifikation.utdocspec
+
+[UltraTorkProject]
+MarkUnresolvedRequirements=true
+RequirementsFile=E54UserStories_20191216.csv
+SwVersion=RC5 V03.02
+TestAssemblyDir=../Anlagen
+TestCaseDir=../TestcaseList
+WatchdogTimeout=0

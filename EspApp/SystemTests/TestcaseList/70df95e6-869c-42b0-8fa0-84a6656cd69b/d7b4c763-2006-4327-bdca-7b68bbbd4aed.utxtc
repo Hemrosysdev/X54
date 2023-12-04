@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>d7b4c763-2006-4327-bdca-7b68bbbd4aed</Id>
+	<Name>E004 LED-shortcut</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-17T15:03:48</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>Testcase description:
+In this testcase it will be checked if a LED shortcut initiates the Error E004 in Error log and in System statistics.
+
+Testcase execution:
+1. Switch power off (X54-HW)
+2. Dismantle the X54-HW to see the LEDs on the HW-board
+3. Isolate the HW-board and switch power on.
+4. Select one LED with rotate the Jogdial.
+5. Shortcut the highlighted LED with a pincette.
+
+Expected result:
+1. The power is off.
+2. n/a
+3. The X54 HW-board is switched on - LEDs lights 
+4. n/a
+5. The Error E004 is displayed 
+In Error log - E004 - is added
+e.g.: 6;1970-01-01T00:05:47;E004;Activate;&quot;11:Lsd&quot;
+In System statistcs the counter for Error E004 is increased</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-10</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mahlkönig X54 Login</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="zepto.min.js"></script>
+<script type="text/javascript">
+function startModal()
+{
+// When the modal is shown, we want a fixed body
+const scrollY = document.documentElement.scrollTop;
+document.body.style.position = 'fixed';
+document.body.style.top = '-' + scrollY + 'px';
+}
+function stopModal()
+{
+const scrollY = document.body.style.top;
+document.body.style.position = '';
+document.body.style.top = '';
+document.documentElement.scrollTop = -parseInt( scrollY );
+}
+function closeConfirmPopup()
+{
+stopModal();
+document.getElementById( "confirm_popup" ).style.display = "none";
+$( "#confirm_popup_ok" ).unbind( "click" );
+}
+function openConfirmPopup( strCaption, strPrompt )
+{
+startModal();
+var confirmPopupElement = document.getElementById( "confirm_popup" );
+var confirmPopupCaptionTextElement = document.getElementById( "confirm_popup_caption_text" );
+var confirmPopupContentElement = document.getElementById( "confirm_popup_content" );
+confirmPopupElement.style.display = "block";
+confirmPopupCaptionTextElement.innerHTML = strCaption;
+confirmPopupContentElement.innerHTML = strPrompt;
+$( "#confirm_popup_ok" ).unbind( "click" );
+}
+function closePopup()
+{
+stopModal();
+popup.style.display = "none";
+}
+function enablePopupOk()
+{
+popup_ok.style.display = "block";
+popup_content.style.height = "390px";
+}
+function openPopup( strCaption, bStartLoader )
+{
+startModal();
+popupCaptionText.innerHTML = strCaption;
+popup.style.display = "block";
+preElement.innerHTML = "";
+logElement.innerHTML = "";
+if ( bStartLoader )
+{
+popupLoader.style.display = "block";
+}
+popupProgressInfo.style.display = "none";
+popup_ok.style.display = "none";
+popup_content.style.height = "490px";
+}
+</script>
+</head>
+<body>
+<div style="width:100%;padding:0;">
+<div id="headerBackground" style="width:100%;height:240px;margin:auto;color:black;background-color:white;position:relative;">
+<div id="imageCenterBar" style="position:relative;top:50%;transform:translateY(-50%);">
+<img id="mahlkoenig_logo" alt="Mahlk&ouml;nig Logo"
+style="position:relative;height:120px;left:50%;transform:translateX(-50%);"
+src="mahlkoenig_logo_210x120.png" />
+</div>
+</div>
+<div id="grinderBackground" style="width:100%;height:960px;color:white;background-color:black;padding:0;">
+<table style="margin:auto;position:relative;top:50%;transform:translateY(-50%);">
+<tr>
+<td>
+<img alt="X54 Grinder" style="height:800px;" src="x54.jpg" />
+</td>
+<td style="text-align:left;padding:100px;">
+<p>
+<div style="font-size:50px;font-weight: bold;">
+X54
+</div>
+</p>
+<p>
+<div style="font-size:20px;font-weight: 500;text-transform: uppercase;">
+SN
+</div>
+<div style="font-size:25px;font-weight: bold;">
+var_currentSn
+</div>
+</p>
+<p>
+<div style="font-size:20px;font-weight: 500;text-transform: uppercase;">
+MODEL
+</div>
+<div style="font-size:25px;font-weight: bold;">
+X54 first edition
+</div>
+</p>
+<p>&nbsp;</p>
+<p>
+</p>
+</td>
+</tr>
+</table>
+</div>
+<noscript>
+<div style="color: red;font-size: 20px;">
+Please activate Javascript to use X54 Web Interface!
+</div>
+</noscript>
+<div id="infoBackground" style="width:100%;color:black;background-color:#f7f7f7;margin:auto;float:left;">
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<form action="/login?id=var_sessionId" accept-charset="utf-8" method="post">
+<table class="infoTable">
+<tr>
+<td colspan="3" style="text-align:center;color:#918f90;">
+Your grinder has been protected by a password.</br>Please enter the password to get access to the web interface.
+</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>
+<input type="password" id="password" name="password" size="30" value="" >
+<script>
+$( "#password" ).on( "keydown", function()
+{
+document.getElementById( "submit" ).disabled = false;
+document.getElementById( "revert" ).disabled = false;
+});
+$( "#password" ).on( "paste", function()
+{
+document.getElementById( "submit" ).disabled = false;
+document.getElementById( "revert" ).disabled = false;
+});
+</script>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="3"><div style="color:red;text-align:center;">var_loginErrorMsg</div></td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;">
+<button class="redbutton" id="submit" name="submit" disabled>Submit</button>
+<button class="blackbutton" id="revert" name="revert" style="width:240px;" disabled>Reload</button>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<p>&nbsp;</p>
+<div class="infoRegion" >
+<table class="infoTable">
+<tr>
+<td class="tableDescriptorBold" width="308">Support</td>
+<td class="tableDescriptorNormal" width="430" style="white-space: nowrap;">
+<a href="http://www.mahlkoenig.de/pages/service" target="_blanc">www.mahlkoenig.de/pages/service</a>
+<img alt="X54 QR Code" align="middle" style="height:80px;" src="qrcode.png"	/>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tableDescriptorNormal" style="text-align:center;">
+<a href="copyright.html" style="font-size:12px;">X54 Software Copyright</a>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+<!-- popup definition -->
+<div id="popup" class="popup">
+<div class="popup_box" id="popup_box">
+<span id="popup_close" class="popup_close">&times;</span>
+<div id="popup_caption" class="popup_caption">
+<div id="popup_caption_text" class="popup_caption_text">
+</div>
+</div>
+<div class="popup_content" id="popup_content">
+<div id="popup_loader" class="popup_loader">
+<p>Executing ...</p>
+<p><div class="lds-ripple"><div></div><div></div></div></p>
+</div>
+<div id="popup_progress_info" class="popup_progress_info">
+Upload new firmware file<br>
+<div id="popup_progress_bar" class="popup_progress_bar">
+<div id="popup_progress_bar_progress" class="popup_progress_bar_progress">0%</div>
+</div>
+Update progress. Please wait until the installation is completed!
+</div>
+<div id="log_id"></div>
+<pre id="pre_id"></pre>
+</div>
+<div class="popup_base" id="popup_base">
+<button class="redbutton" id="popup_ok" style="display:none;margin-top:15px;">Ok</button>
+</div>
+</div>
+</div>
+<!-- confirm popup definition -->
+<div id="confirm_popup" class="confirm_popup">
+<div class="confirm_popup_box">
+<span id="confirm_popup_close" class="confirm_popup_close">&times;</span>
+<div id="confirm_popup_caption" class="confirm_popup_caption">
+<div id="confirm_popup_caption_text" class="confirm_popup_caption_text">
+</div>
+</div>
+<div class="confirm_popup_content" id="confirm_popup_content">
+</div>
+<div class="confirm_popup_base" id="confirm_popup_base">
+<table>
+<tr>
+<td><button class="blackbutton" style="width:240px;" id="confirm_popup_cancel">Cancel</button></td>
+<td width="50px">&nbsp;</td>
+<td><button class="redbutton" id="confirm_popup_ok">Ok</button></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+// Get the popup objects
+var popup = document.getElementById( "popup" );
+var popup_close = document.getElementsByClassName( "popup_close" )[0];
+var popup_ok = document.getElementById( "popup_ok" );
+var popup_content = document.getElementById( "popup_content" );
+var popupCaptionText = document.getElementById("popup_caption_text");
+var popupLoader = document.getElementById("popup_loader");
+var popupProgressInfo = document.getElementById("popup_progress_info");
+var popupProgressBar = document.getElementById("popup_progress_bar");
+var popupProgressBarProgress = document.getElementById("popup_progress_bar_progress");
+var preElement = document.getElementById("pre_id");
+var logElement = document.getElementById("log_id");
+// When the user clicks on <span> (x), close the popup
+popup_close.onclick = function()
+{
+closePopup();
+}
+popup_ok.onclick = function()
+{
+closePopup();
+}
+document.getElementById( "confirm_popup_cancel" ).onclick = function()
+{
+closeConfirmPopup();
+};
+document.getElementById( "confirm_popup_close" ).onclick = function()
+{
+closeConfirmPopup();
+};
+</script>
+</body>
+</html>

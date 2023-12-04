@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>9261aad3-d0a4-4565-a20f-9a39b13e9946</Id>
+	<Name>Show latest grind mode before standby mode</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-02-03T10:19:27</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>In this test case it will be checked if the latest confirmed grind mode set before standby mode will be used after the grinder wakes up from standby mode.
+A grind mode is considered to be confirmed when it stays here for at least 5 sec.
+
+**Initial state of the test**
+The grinder is switched on. 
+
+**Test steps**
+(a) Select any grind mode by rotating the jog dial
+(b) Wait till the grinder goes to standby mode
+(c) Wake up from standby mode by pressing the start button
+    => The menu selected before standby will be shown
+
+The test is carried out with all grind menues.</Description>
+	<Implementation>HE54-22</Implementation>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-22</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

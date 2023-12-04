@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>1561d8f7-ac6f-450e-b642-56b2f0db5fbc</Id>
+	<Name>Complete log data DOWNLOAD</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-02T14:22:29</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>In this test case it will be checked if complete log data can be downloaded with Hemro X54 web interface when the DOWNLOAD button of Complete log data will be pressed.
+
+**Initial state of the test**
+The grinder is switched on.
+
+**Test steps**
+(a) If wifi-icon in the grinder display is not highlighted:
+     Rotate the jog dial to enter wifi menu
+     Long press the jog dial
+     Set status to &apos;on&apos; by rotating the jog dial
+     Save the status by long pressing the jog dial
+     => wifi is on
+(b) Make sure that X54Grinder-9425AA network is connected
+(c) Go to X54 web interface (192.168.4.1)
+(d) Press button DOWNLOAD for Complete log data
+     =>  eg. following information is downloaded:
+
+For example:
+
+[StatisticData]
+X54ExportIdentification;
+ExportSessionId;52
+ExportTimestamp;1970-01-01T05:14:05
+GrinderName;X54Grinder
+ProductNo;HEM-E54-HMI-P01c205
+SerialNo;06C266
+Type;StatisticData
+
+X54StatisticData;
+SystemRestarts;52
+TotalGrindShots;100
+TotalGrindTime;12814
+Recipe1GrindShots;1
+Recipe1GrindTime;5
+Recipe2GrindShots;0
+Recipe2GrindTime;0
+Recipe3GrindShots;0
+Recipe3GrindTime;0
+Recipe4GrindShots;2
+Recipe4GrindTime;70
+ManualModeGrindShots;27
+ManualModeGrindTime;3631
+DiscLifeTime;3038
+TotalOnTime;3027
+StandbyTime;1979
+TotalMotorOnTime;12814
+TotalErrors01;30
+TotalErrors02;1
+TotalErrors03;0
+TotalErrors04;1
+TotalErrors08;0
+TotalErrors09;0
+TotalErrors10;0
+
+
+[ErrorLogData]
+1;1970-01-01T00:00:09;E004;Activate;&quot;17:Lsd;8:Lsd;3:Lsd;16:Lsd;18:Lsd;7:Lsd;10:Lsd;33:L&quot;
+2;1970-01-01T00:00:02;E001;Activate;&quot;&quot;
+2;1970-01-01T00:00:02;E009;Event;&quot;ESP_RST_WDT&quot;
+2;1970-01-01T00:00:10;E001;Deactivate;&quot;&quot;
+2;1970-01-01T00:00:15;E001;Activate;&quot;&quot;
+2;1970-01-01T00:00:16;E001;Deactivate;&quot;&quot;
+2;1970-01-01T00:00:18;E001;Activate;&quot;&quot;
+3;1970-01-01T00:00:02;E009;Event;&quot;ESP_RST_WDT&quot;
+3;1970-01-01T00:00:02;E001;Activate;&quot;&quot;
+3;1970-01-01T00:00:03;E001;Deactivate;&quot;&quot;
+3;1970-01-01T00:00:03;E001;Activate;&quot;&quot;
+3;1970-01-01T00:00:03;E001;Deactivate;&quot;&quot;
+3;1970-01-01T00:00:18;E001;Activate;&quot;&quot;
+3;1970-01-01T00:01:40;E001;Deactivate;&quot;&quot;
+3;1970-01-01T00:01:45;E001;Activate;&quot;&quot;
+4;1970-01-01T00:00:02;E001;Activate;&quot;&quot;
+4;1970-01-01T00:00:02;E009;Event;&quot;ESP_RST_WDT&quot;
+
+[EventLogData]
+48;1970-01-01T00:19:31;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+48;1970-01-01T00:22:26;SWUPDATE;&quot;V02.08&quot;
+49;1970-01-01T00:22:29;RESTART;&quot;V03.02&quot;
+49;1970-01-01T00:22:32;WIFIAP;&quot;Start&quot;
+49;1970-01-01T00:22:36;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T00:00:01;RESTART;&quot;V03.02&quot;
+50;1970-01-01T00:00:04;WIFIAP;&quot;Start&quot;
+50;1970-01-01T00:00:05;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T00:03:35;STDBY;&quot;Off&quot;
+50;1970-01-01T00:03:35;STDBY;&quot;On&quot;
+50;1970-01-01T00:03:36;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T00:03:36;WIFIAP;&quot;Stop&quot;
+50;1970-01-01T01:04:16;WIFIAP;&quot;Start&quot;
+50;1970-01-01T01:05:14;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T01:07:17;STDBY;&quot;Off&quot;
+50;1970-01-01T01:07:17;STDBY;&quot;On&quot;
+50;1970-01-01T01:07:18;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T01:07:18;WIFIAP;&quot;Stop&quot;
+51;1970-01-01T00:00:01;RESTART;&quot;V03.02&quot;
+51;1970-01-01T00:00:04;WIFIAP;&quot;Start&quot;
+51;1970-01-01T00:00:40;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+51;1970-01-01T00:07:23;STDBY;&quot;Off&quot;
+51;1970-01-01T00:07:23;STDBY;&quot;On&quot;
+51;1970-01-01T00:07:24;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+51;1970-01-01T00:07:24;WIFIAP;&quot;Stop&quot;
+51;1970-01-01T00:08:10;WIFIAP;&quot;Start&quot;
+51;1970-01-01T00:08:30;GRAUTOSLCH;&quot;1200&quot;
+51;1970-01-01T00:08:37;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+51;1970-01-01T00:27:07;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T00:00:01;RESTART;&quot;V03.02&quot;
+52;1970-01-01T00:00:04;WIFIAP;&quot;Start&quot;
+52;1970-01-01T00:01:05;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T00:21:33;STDBY;&quot;Off&quot;
+52;1970-01-01T00:21:33;STDBY;&quot;On&quot;
+52;1970-01-01T00:21:34;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T00:21:34;WIFIAP;&quot;Stop&quot;
+52;1970-01-01T00:48:40;WIFIAP;&quot;Start&quot;
+52;1970-01-01T00:49:35;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T01:00:02;GRRECIPECH;&quot;&quot;
+
+52;1970-01-01T01:42:47;GRRECIPECH;&quot;&quot;
+52;1970-01-01T01:44:58;GRRECIPECH;&quot;&quot;
+52;1970-01-01T02:05:05;STDBY;&quot;Off&quot;
+52;1970-01-01T02:05:05;STDBY;&quot;On&quot;
+52;1970-01-01T02:05:06;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T02:05:06;WIFIAP;&quot;Stop&quot;
+52;1970-01-01T04:46:13;WIFIAP;&quot;Start&quot;
+52;1970-01-01T04:46:28;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T04:52:28;GRWIFICFG;&quot;Reset&quot;
+52;1970-01-01T04:52:29;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T04:52:29;WIFIAP;&quot;Stop&quot;
+52;1970-01-01T04:52:38;GRWIFICFG;&quot;On&quot;
+52;1970-01-01T04:52:38;WIFIAP;&quot;Start&quot;
+52;1970-01-01T04:52:39;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestresult>

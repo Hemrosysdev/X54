@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>d39b4f61-748d-49a1-8b1c-aebbda516c90</Id>
+	<Name>Access the grinder by switching WiFi On/Off</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2020-02-03T10:38:26</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+None</Report>
+	<Description>In this test the accessibility of the grinder will be checked when switching wifi to On/ Off in the wifi menu.
+
+**Initial state of the test**
+The grinder is switched on. 
+
+**Test steps**
+(1a) Select the wifi menu by rotating the jog dial
+(1b) Long press the jog dial 
+(1c) Select &apos;On&apos; by rotating the jog dial
+(1d) Long press the jog dial to confirm the setting
+       => wifi ico will be highlighted
+(1e) Make sure that X54Grinder-9425AA network is connected
+(1f) Go to X54 web interface (192.168.4.1)
+      => now any action should be possible
+
+(2a) Select the wifi menu by rotating the jog dial
+(2b) Long press the jog dial 
+(2c) Select &apos;Off&apos; by rotating the jog dial
+(2d) Long press the jog dial to confirm the setting
+(2e) Make sure that X54Grinder-9425AA network is connected
+(2f) Go to X54 web interface (192.168.4.1)
+    => no action should be possible</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-1</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

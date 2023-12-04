@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>0d7efb4f-6b54-4a14-9b56-4aef5ffe19ba</Id>
+	<Name>Save recipe (position X) to other recipe (position Y)</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-17T13:21:55</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC3 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-02T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-02T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-02
+Remarks:
+Stichproben aus den Kombinationen (X) -> (Y)</Report>
+	<Description>Testcase description:
+In this test case it will be checked if a recipe at position X can be saved at position Y.
+
+Testcase execution:
+1. Turn the Jogdial to recipe position 4 (X)
+2. LongPress Jogdial
+3. ShortPress the Jogdial four times
+4. Turn the Jogdial to recipe position 1 (Y)
+5. LongPress Jogdial to save at position 1 (Y)
+
+Kombinations:
+Repeat Teststeps 1 to 5 with following positions:
+Save recipe 4 (X) to recipe position 2 (Y)
+Save recipe 4 (X) to recipe position 3 (Y)
+Save recipe 3 (X) to recipe position 1 (Y)
+Save recipe 3 (X) to recipe position 2 (Y)
+Save recipe 3 (X) to recipe position 4 (Y)
+Save recipe 2 (X) to recipe position 1 (Y)
+Save recipe 2 (X) to recipe position 3 (Y)
+Save recipe 2 (X) to recipe position 4 (Y)
+Save recipe 1 (X) to recipe position 2 (Y)
+Save recipe 1 (X) to recipe position 3 (Y)
+Save recipe 1 (X) to recipe position 4 (Y)
+
+Expected result:
+1. The recipe position 4 is highlighted
+2. In edit mode - first digit is blinking
+3. The recipe position 4 (X) is blinking
+4. The recipe position 1 (Y) is blinking
+5. The recipe 4 (X) is saved at recipe position 1 (Y)
+
+Kombinations:
+Recipe 4 (X) is saved at recipe position 2 (Y)
+Recipe 4 (X) is saved at recipe position 3 (Y)
+Recipe 3 (X) is saved at recipe position 1 (Y)
+Recipe 3 (X) is saved at recipe position 2 (Y)
+Recipe 3 (X) is saved at recipe position 4 (Y)
+Recipe 2 (X) is saved at recipe position 1 (Y)
+Recipe 2 (X) is saved at recipe position 3 (Y)
+Recipe 2 (X) is saved at recipe position 4 (Y)
+Recipe 1 (X) is saved at recipe position 2 (Y)
+Recipe 1 (X) is saved at recipe position 3 (Y)
+Recipe 1 (X) is saved at recipe position 4 (Y)</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-21</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestresult>

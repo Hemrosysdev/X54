@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>f5651164-ef5b-48f5-83c2-5654e1295956</Id>
+	<Name>Web site design for log files</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-17T10:15:28</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>Testcase description:
+In this testcase it will be checked if the web site layout-design for log-files is correct.
+
+Precondition:
+The X54 WiFi connection is established.
+( The access to X54 web interface is described in Testcase: StatisticDataRepresentationInWebSite )
+
+Testcase execution:
+1. Select SHOW for Event log in X54 web site.
+2. Select SHOW for Error log in X54 web site.
+
+Expected result:
+1. The Event log has the following layout-design (*.csv).:
+The tester finds the exact layout description in: HEM-E54-HMI-IN#03-EventLogging-100-002.pdf
+For example:
+48;1970-01-01T00:19:28;RESTART;&quot;V02.08&quot;
+48;1970-01-01T00:19:29;WIFI;&quot;Config-Change&quot;
+48;1970-01-01T00:19:29;WIFI;&quot;On&quot;
+48;1970-01-01T00:19:29;WIFIAP;&quot;Start&quot;
+48;1970-01-01T00:19:31;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+48;1970-01-01T00:22:26;SWUPDATE;&quot;V02.08&quot;
+49;1970-01-01T00:22:29;RESTART;&quot;V03.02&quot;
+49;1970-01-01T00:22:32;WIFIAP;&quot;Start&quot;
+49;1970-01-01T00:22:36;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T00:00:01;RESTART;&quot;V03.02&quot;
+50;1970-01-01T00:00:04;WIFIAP;&quot;Start&quot;
+50;1970-01-01T00:00:05;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T00:03:35;STDBY;&quot;Off&quot;
+50;1970-01-01T00:03:35;STDBY;&quot;On&quot;
+50;1970-01-01T00:03:36;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T00:03:36;WIFIAP;&quot;Stop&quot;
+50;1970-01-01T01:04:16;WIFIAP;&quot;Start&quot;
+50;1970-01-01T01:05:14;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T01:07:17;STDBY;&quot;Off&quot;
+50;1970-01-01T01:07:17;STDBY;&quot;On&quot;
+50;1970-01-01T01:07:18;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+50;1970-01-01T01:07:18;WIFIAP;&quot;Stop&quot;
+51;1970-01-01T00:00:01;RESTART;&quot;V03.02&quot;
+51;1970-01-01T00:00:04;WIFIAP;&quot;Start&quot;
+51;1970-01-01T00:00:40;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+51;1970-01-01T00:07:23;STDBY;&quot;Off&quot;
+51;1970-01-01T00:07:23;STDBY;&quot;On&quot;
+51;1970-01-01T00:07:24;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+51;1970-01-01T00:07:24;WIFIAP;&quot;Stop&quot;
+51;1970-01-01T00:08:10;WIFIAP;&quot;Start&quot;
+51;1970-01-01T00:08:30;GRAUTOSLCH;&quot;1200&quot;
+
+52;1970-01-01T01:29:04;GRRECIPECH;&quot;&quot;
+52;1970-01-01T01:29:27;GRRECIPECH;&quot;&quot;
+52;1970-01-01T01:42:47;GRRECIPECH;&quot;&quot;
+52;1970-01-01T01:44:58;GRRECIPECH;&quot;&quot;
+52;1970-01-01T02:05:05;STDBY;&quot;Off&quot;
+52;1970-01-01T02:05:05;STDBY;&quot;On&quot;
+52;1970-01-01T02:05:06;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T02:05:06;WIFIAP;&quot;Stop&quot;
+52;1970-01-01T04:46:13;WIFIAP;&quot;Start&quot;
+52;1970-01-01T04:46:28;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T04:52:28;GRWIFICFG;&quot;Reset&quot;
+52;1970-01-01T04:52:29;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T04:52:29;WIFIAP;&quot;Stop&quot;
+52;1970-01-01T04:52:38;GRWIFICFG;&quot;On&quot;
+52;1970-01-01T04:52:38;WIFIAP;&quot;Start&quot;
+52;1970-01-01T04:52:39;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T05:13:17;STDBY;&quot;Off&quot;
+52;1970-01-01T05:13:17;STDBY;&quot;On&quot;
+52;1970-01-01T05:13:18;WIFIAP;&quot;STA-Disconnect: d4:3b:04:c4:ed:93&quot;
+52;1970-01-01T05:13:18;WIFIAP;&quot;Stop&quot;
+52;1970-01-01T05:13:51;WIFIAP;&quot;Start&quot;
+52;1970-01-01T05:13:58;WIFIAP;&quot;STA-Connect: d4:3b:04:c4:ed:93&quot;
+
+2. The Error log has the following layout-design (*.csv).:
+The tester finds the exact layout description in: HEM-E54-HMI-IN#02-ErrorConcept-100-003.pdf
+For example:
+24;1970-01-01T00:00:44;E001;Deactivate;&quot;&quot;
+25;1970-01-01T00:00:02;E009;Event;&quot;ESP_RST_WDT&quot;
+26;1970-01-01T00:00:02;E009;Event;&quot;ESP_RST_WDT&quot;
+27;1970-01-01T01:57:03;E009;Event;&quot;ESP_RST_PANIC&quot;
+32;1970-01-01T00:03:24;E001;&quot;Hopper dismounted&quot;;Activate;&quot;&quot;
+32;1970-01-01T00:03:31;E001;&quot;Hopper dismounted&quot;;Deactivate;&quot;&quot;
+32;1970-01-01T00:03:32;E001;&quot;Hopper dismounted&quot;;Activate;&quot;&quot;
+32;1970-01-01T00:04:01;E001;&quot;Hopper dismounted&quot;;Deactivate;&quot;&quot;
+32;1970-01-01T00:04:01;E001;&quot;Hopper dismounted&quot;;Activate;&quot;&quot;
+32;1970-01-01T00:04:02;E001;&quot;Hopper dismounted&quot;;Deactivate;&quot;&quot;
+35;1970-01-01T00:06:41;E002;&quot;WiFi failed&quot;;Activate;&quot;&quot;
+35;1970-01-01T00:06:42;E002;&quot;WiFi failed&quot;;Deactivate;&quot;&quot;
+35;1970-01-01T00:20:57;E001;&quot;Hopper dismounted&quot;;Activate;&quot;&quot;
+35;1970-01-01T00:21:00;E001;&quot;Hopper dismounted&quot;;Deactivate;&quot;&quot;
+35;1970-01-01T00:21:03;E001;&quot;Hopper dismounted&quot;;Activate;&quot;&quot;
+35;1970-01-01T00:21:04;E001;&quot;Hopper dismounted&quot;;Deactivate;&quot;&quot;
+42;1970-01-01T01:14:21;E001;&quot;Hopper dismounted&quot;;Activate;&quot;&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-224</RequirementLink>
+		<RequirementLink>HE54-329</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>

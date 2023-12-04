@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestresult>
+	<Id>1a0af724-2c46-4bdf-b6b4-93ac3454f784</Id>
+	<Name>WiFi Settings Design</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2022-08-03T08:18:03</Created>
+	<SortIndex>-1</SortIndex>
+	<ResultType>PASSED</ResultType>
+	<SwVersion>RC4 V03.02</SwVersion>
+	<ExecutionStartTime>2022-08-04T00:00:00</ExecutionStartTime>
+	<ExecutionEndTime>2022-08-04T00:00:00</ExecutionEndTime>
+	<Report>Manual test result created: 2022-08-04
+Remarks:
+None</Report>
+	<Description>Testcase description:
+In this testcase it will be checked, if the WiFi Settings in web site for the X54 grinder has the right layout.
+
+Testcase execution:
+X54:
+1. Rotate Jogdial to WIFI
+2. LongPress on Jogdial
+3. Rotate Jogdial to &quot;ON&quot; (OFF, ON ,rSET)
+4. LongPress on Jogdial
+PC:
+1. Activate &quot;Funkverbindung&quot;
+2. Select Grinder xxxxx
+3. Insert password: &quot;home1234&quot;
+4. Establish WIFI connection
+Internet:
+5. Call X54 web site with IP: 192.168.4.1
+6. Select the &quot;SHOW&quot;-Button for &quot;System statistics&quot;
+
+Expected result:
+X54:
+1. The WIFI-Icon is highlighted
+2. The WIFI-menu is shown
+3. &quot;ON&quot; is adjusted
+4. The WLAN is switched on.
+PC:
+1. &quot;Funkverbindung&quot; is activated
+2. In the list of &quot;Funkverbindung&quot; - grinder is selected
+3. Password is accepted
+4. WIFI connection is established
+Internet:
+5. The X54 webside is displayed with the following layout:
+    1, System statistics   &quot;SHOW&quot; (list + csv representation)
+    2, WiFi Settings         &quot;WiFi-Icon&quot;
+    3. Event Log              &quot;SHOW&quot; (csv)
+    4. Error Log               &quot;SHOW&quot; (csv) 
+    5. Complete log data &quot;DOWNLOAD&quot;
+Software update
+    1.  Please select                     &quot;SELECT FILE&quot;
+         HEM-X54-HMI-S01
+         firmware file
+    2.  Chosen file
+    3.  Peform upload &amp; install    &quot;UPLOAD FILE&quot;
+6. Select for WiFi Settings the &quot;WiFi Icon&quot;
+    The WiFi Settings are displayed with the following layout:
+    1. Hostname   x54grinder-06c266
+    2. Current Access Point IP Address  192.168.4.1
+    3. Access Point MAC Address  f0:08:d1:5f:7c:15
+    4. Current Station IP Address  
+    5. Station MAC Address 
+    6. Station SSID
+    7. Station Password
+    8. Radio-Buttons: &quot;DHCP&quot; or &quot;Static IP Address&quot;
+    9. Static IP Address
+    10, Gateway
+    11: Netmask
+    12. Buttons: &quot;SAVE&quot; or &quot;REVERT&quot;
+    13: Home-Button: &quot;Home-Icon&quot;</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+</UltraTorkTestresult>

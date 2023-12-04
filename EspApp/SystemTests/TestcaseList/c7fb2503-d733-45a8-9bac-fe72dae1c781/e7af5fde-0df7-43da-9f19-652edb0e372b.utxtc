@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UltraTorkTestcase>
+	<Id>e7af5fde-0df7-43da-9f19-652edb0e372b</Id>
+	<Name>Initial PW for WiFi connection</Name>
+	<AutomationType>MANUAL</AutomationType>
+	<TestcaseState>IMPLEMENTED</TestcaseState>
+	<WatchdogTimeout>0</WatchdogTimeout>
+	<Created>2021-02-03T14:39:26</Created>
+	<SortIndex>-1</SortIndex>
+	<Description>Testcase description:
+In this testcase it will be checked, if the access with the new password to WIFI of the X54 grinder is possible, how it is described in the ticket HE54-258.
+
+Testcase execution:
+X54:
+1. Rotate Jogdial to WIFI
+2. LongPress on Jogdial
+3. Rotate Jogdial to &quot;ON&quot; (OFF, ON ,rSET)
+4. LongPress on Jogdial
+PC:
+1. Activate &quot;Funkverbindung&quot;
+2. Initial: Select Grinder xxxxx
+3. Initial: Insert password: &quot;home1234&quot;
+4. Establish WIFI connection
+
+Expected result:
+X54
+1. The WIFI-Icon is highlighted
+2. The WIFI-menu is shown
+3. &quot;ON&quot; is adjusted
+4. The WLAN is switched on.
+PC:
+1. &quot;Funkverbindung&quot; is activated
+2. In the list of &quot;Funkverbindung&quot; - grinder is selected
+3. Password is accepted
+4. WIFI connection is established</Description>
+	<ConfigurationFileList>
+		<ConfigurationFile>../Configuration/E54-Integration-Manuell.dat</ConfigurationFile>
+	</ConfigurationFileList>
+	<RequirementLinkList>
+		<RequirementLink>HE54-258</RequirementLink>
+	</RequirementLinkList>
+</UltraTorkTestcase>
